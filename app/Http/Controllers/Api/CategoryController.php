@@ -38,6 +38,6 @@ class CategoryController extends Controller
                 'categories' => $categories
             ]);
         }
-    }
+    }d
 
 }
