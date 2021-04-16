@@ -38,9 +38,13 @@ Route::namespace('Api')->group(function(){
         Route::get('order_details/{order_id}', 'OrderController@get_order_details');
         Route::post('cancel_order', 'OrderController@cancel_order');
 
+
+        Route::post('/logout', 'AuthController@logout');
     });
     
-    
+    Route::post('/register', 'AuthController@register');
+    Route::post('/login', 'AuthController@login');
 
-});
+
+});   
 

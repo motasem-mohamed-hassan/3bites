@@ -28,7 +28,11 @@ class OrderController extends Controller
         // $admin = Admin::get();
         // Notification::send($admin, new NewOrder($order));
 
-        return response()->json($order);
+        return response()->json([
+            'status'    => true,
+            'msg'       => 'Order stored successfully',
+            'category'      => $order
+        ]);
 
     }
 
