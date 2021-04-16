@@ -14,9 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::namespace('Api')->group(function(){
     //Categories
@@ -33,6 +30,17 @@ Route::namespace('Api')->group(function(){
     Route::get('product/{id}', 'ProductController@show');
     Route::put('product/update/{id}', 'ProductController@update');
     Route::delete('product/delete/{id}', 'ProductController@destroy');
+
+
+    Route::middleware('auth:api')->group(function(){
+        Route::post('/order/store', 'OrderController@store_order');
+        Route::get('order_list/{user_id}', 'OrderController@get_order_list');
+        Route::get('order_details/{order_id}', 'OrderController@get_order_details');
+        Route::post('cancel_order', 'OrderController@cancel_order');
+
+    });
+    
+    
 
 });
 
