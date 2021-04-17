@@ -42,6 +42,14 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+
+        $imageurl = $request->file('image');
+        $imageurl->getClientOriginalName();
+        $ext    = $imageurl->getClientOriginalExtension();
+        $file   = date('YmdHis').rand(1,99999).'.'.$ext;
+        $imageurl->storeAs('public/categories', $file);
+        $product->image = $file;
+
         $product->save();
 
         return back();
@@ -83,6 +91,19 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+
+        if($request->hasFile('image')){
+            File::delete('public/products/'.$product->image);
+            Storage::disk('local')->delete('public/categories/'.$product->image);
+
+            $imageurl = $request->file('image');
+            $imageurl->getClientOriginalName();
+            $ext    = $imageurl->getClientOriginalExtension();
+            $file   = date('YmdHis').rand(1,99999).'.'.$ext;
+            $imageurl->storeAs('public/categories', $file);
+            $product->image = $file;
+        }
+
         $product->save();
 
         return back();
@@ -96,7 +117,13 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        Product::find($id)->delete();
+        $product = Product::find($id);
+
+        File::delete('public/products/'.$product->image);
+        Storage::disk('local')->delete('public/categories/'.$product->image);
+
+        $product->delete();
+
 
         return back();
     }

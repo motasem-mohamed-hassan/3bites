@@ -20,3 +20,22 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('dashboard')->middleware('IsAdmin')->group(function(){
+
+    //categories
+    Route::get('categories', 'CategoryController@index');
+    Route::post('categories', 'CategoryController@store');
+    Route::get('category/{id}', 'CategoryController@show');
+    Route::put('category/update/{id}', 'CategoryController@update');
+    Route::delete('category/delete/{id}', 'CategoryController@destroy');
+
+    //Products
+    Route::get('products', 'ProductController@index');
+    Route::post('products', 'ProductController@store');
+    Route::get('product/{id}', 'ProductController@show');
+    Route::put('product/update/{id}', 'ProductController@update');
+    Route::delete('product/delete/{id}', 'ProductController@destroy');
+
+
+});

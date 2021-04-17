@@ -18,7 +18,8 @@ class AuthController extends Controller
             'last_name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|unique:users',
-            'address'=> 'required',
+            'lon'   => 'required',
+            'lat'   => 'required',
             'password' => 'required|confirmed'
         ]);
 
@@ -38,7 +39,7 @@ class AuthController extends Controller
             'user' => $user,
             'access_token' => $accessToken,
         ]);
-    
+
     }
 
 
@@ -82,6 +83,6 @@ class AuthController extends Controller
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
     }
-    
+
 
 }
