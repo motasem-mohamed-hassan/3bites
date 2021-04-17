@@ -33,18 +33,18 @@ Route::namespace('Api')->group(function(){
 
 
     Route::middleware('auth:api')->group(function(){
-        Route::post('/order/store', 'OrderController@store_order');
-        Route::get('order_list/{user_id}', 'OrderController@get_order_list');
-        Route::get('order_details/{order_id}', 'OrderController@get_order_details');
-        Route::post('cancel_order', 'OrderController@cancel_order');
+        // Route::post('/order/store', 'OrderController@store_order');
+        // Route::get('order_list/{user_id}', 'OrderController@get_order_list');
+        // Route::get('order_details/{order_id}', 'OrderController@get_order_details');
+        // Route::post('cancel_order', 'OrderController@cancel_order');
 
 
         Route::post('/logout', 'AuthController@logout');
     });
-    
+
     Route::post('/register', 'AuthController@register');
     Route::post('/login', 'AuthController@login');
 
 
-});   
+});
 
