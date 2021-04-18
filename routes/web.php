@@ -21,6 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('send', 'HomeController@sendNotification'); //for notification
+
+
 Route::prefix('dashboard')->middleware('IsAdmin')->group(function(){
 
     //categories

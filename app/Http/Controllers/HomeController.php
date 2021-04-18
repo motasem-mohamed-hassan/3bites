@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use App\Notifications\mobileNotification;
+use Illuminate\Support\Facades\Notification;
 
 class HomeController extends Controller
 {
@@ -24,5 +27,15 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function sendNotification()
+    {
+        $user = User::first();
+        Notification::send($user, new mobileNotification());
+
+        dd('done');
+
+
     }
 }
