@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('send', 'HomeController@sendNotification'); //for notification
 
 
-Route::prefix('dashboard')->middleware('IsAdmin')->group(function(){
+Route::prefix('dashboard')->group(function(){
 
     //categories
     Route::get('categories', 'CategoryController@index');
@@ -35,7 +35,7 @@ Route::prefix('dashboard')->middleware('IsAdmin')->group(function(){
 
     //Products
     Route::get('products', 'ProductController@index');
-    Route::post('products', 'ProductController@store');
+    Route::post('products', 'ProductController@store')->name('product.store');
     Route::get('product/{id}', 'ProductController@show');
     Route::put('product/update/{id}', 'ProductController@update');
     Route::delete('product/delete/{id}', 'ProductController@destroy');

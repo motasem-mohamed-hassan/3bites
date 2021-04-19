@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-
+use OneSignal;
 class ProductController extends Controller
 {
     /**
@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return $products;
+        return view('test.test', compact('products'));
     }
 
     /**
@@ -43,14 +43,23 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
 
-        $imageurl = $request->file('image');
-        $imageurl->getClientOriginalName();
-        $ext    = $imageurl->getClientOriginalExtension();
-        $file   = date('YmdHis').rand(1,99999).'.'.$ext;
-        $imageurl->storeAs('public/categories', $file);
-        $product->image = $file;
+        // $imageurl = $request->file('image');
+        // $imageurl->getClientOriginalName();
+        // $ext    = $imageurl->getClientOriginalExtension();
+        // $file   = date('YmdHis').rand(1,99999).'.'.$ext;
+        // $imageurl->storeAs('public/categories', $file);
+        // $product->image = $file;
 
         $product->save();
+
+        OneSignal::sendNotificationToAll(
+            "Some Message", 
+            $url = null, 
+            $data = null, 
+            $buttons = null, 
+            $schedule = null
+        );
+    
 
         return back();
     }
