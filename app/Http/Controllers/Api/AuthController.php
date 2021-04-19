@@ -16,16 +16,23 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required|unique:users',
+            'email' => 'required',
+            'phone' => 'required',
             'lon'   => 'required',
             'lat'   => 'required',
             'password' => 'required|confirmed'
         ]);
 
-        if($validator->fails()){
+        if(User::where('email', $request->email)->count() > 0) {
             return response([
-                'errors'=>$validator->errors()->all(),
+                'errors'=>"repeted email",
+                'status'=> 3
+            ], 200);
+        }
+
+        if(User::where('phone', $request->phone)->count() > 0) {
+            return response([
+                'errors'=>"repeted phone",
                 'status'=> 2
             ], 200);
         }
