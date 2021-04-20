@@ -24,21 +24,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('send', 'HomeController@sendNotification'); //for notification
 
 
-Route::prefix('dashboard')->group(function(){
+Route::prefix('dashboard')->namespace('Dashboard')->as('d.')->group(function(){
+
+    Route::get('/', 'DhomeController@index')->name('home');
 
     //categories
-    Route::get('categories', 'CategoryController@index');
-    Route::post('categories', 'CategoryController@store');
-    Route::get('category/{id}', 'CategoryController@show');
-    Route::put('category/update/{id}', 'CategoryController@update');
-    Route::delete('category/delete/{id}', 'CategoryController@destroy');
+    Route::get('categories', 'DcategoryController@index')->name('category.index');
+    Route::post('categories', 'DcategoryController@store')->name('category.store');
+    // Route::get('category/{id}', 'DcategoryController@show')->name('category.store');
+    Route::put('category/update/{id}', 'DcategoryController@update')->name('category.update');
+    Route::delete('category/delete/{id}', 'DcategoryController@destroy')->name('category.delete');
 
     //Products
-    Route::get('products', 'ProductController@index');
-    Route::post('products', 'ProductController@store')->name('product.store');
-    Route::get('product/{id}', 'ProductController@show');
-    Route::put('product/update/{id}', 'ProductController@update');
-    Route::delete('product/delete/{id}', 'ProductController@destroy');
+    Route::get('products', 'DproductController@index')->name('product.index');
+    Route::post('products', 'DproductController@store')->name('product.store');
+    // Route::get('product/{id}', 'DproductController@show');
+    Route::put('product/update', 'DproductController@update')->name('product.update');
+    Route::delete('product/delete/{id}', 'DproductController@destroy')->name('product.delete');
 
 
 });
