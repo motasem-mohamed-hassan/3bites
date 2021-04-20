@@ -5,9 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div class="card-header" style="font-size: 25px">
+                    <img src="admin/dist/img/logo.png" style="width: 7%;margin-x:10px">
+                    {{ __('Login') }}
+                </div>
+
+                <div class="card-body"  style="background-image:url('admin/dist/img/untitled-2.gif');size:100% 100% " >
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -51,7 +55,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="mb-0 form-group row">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
