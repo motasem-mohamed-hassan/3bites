@@ -54,6 +54,7 @@
 
     <!-- PAGE SCRIPTS -->
     <script src="{{ asset('admin/dist/js/pages/dashboard2.js') }}"></script>
+    @flasher_render
 </body>
 
 </html>

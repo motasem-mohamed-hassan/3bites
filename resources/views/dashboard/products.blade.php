@@ -20,8 +20,8 @@
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p class="card-text">{{ $product->price }}</p>
                                     <div class="button-group d-flex">
-                                        <button type="button" product_name="{{ $product->name }}"
-                                            category_id="{{ $product->category_id }}" product_id="{{ $product->id }}"
+                                        <button type="button" category_id="{{ $product->category_id }}"
+                                            product_id="{{ $product->id }}" product_name="{{ $product->name }}"
                                             product_price="{{ $product->price }}" product_image="{{ $product->image }}"
                                             product_description="{{ $product->description }}"
                                             style='width:45%;height:30px'
@@ -77,8 +77,8 @@
                                 <input type="text" id="editDescription" name="description" class="form-control" value="">
                             </div>
                             <div class="form-group">
-                                <label>Product price</label>
-                                <input type="text" id="editPrice" name="price" class="form-control" value="">
+                                <label>Product Price</label>
+                                <input type="text" name="price" class="form-control editPrice" value="">
                             </div>
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
@@ -124,6 +124,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select category</label>
                                         <select class="form-control" id="exampleFormControlSelect1" name="category_id">
+                                                <option desable selected>--Choce Category--</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
@@ -159,31 +160,34 @@
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
-            @endsection
+@endsection
 
-            @section('scripts')
-                <script>
-                    $(document).on('click', '.editBtn', function(e) {
-                        e.preventDefault();
+@section('scripts')
+    <script>
+        $(document).on('click', '.editBtn', function(e) {
+            e.preventDefault();
 
-                        var product_id = $(this).attr('product_id');
-                        var product_name = $(this).attr('product_name');
-                        var product_price = $(this).attr('product_price');
-                        var product_description = $(this).attr('product_description');
-                        var product_image = ("image", $("#editImg")[0].files[0]);
+            var product_id = $(this).attr('product_id');
+            var product_name = $(this).attr('product_name');
+            var product_price = $(this).attr('product_price');
+            var product_description = $(this).attr('product_description');
+            var product_image = ("image", $("#editImg")[0].files[0]);
 
 
-                        // var product_image = $(this).
-                        // var product_image = $('input[type=file]')[0].files[0];
+            // var product_image = $(this).
+            // var product_image = $('input[type=file]')[0].files[0];
 
-                        $('#editName').val(product_name);
-                        $('#editDescription').val(product_description);
-                        $('#editPrice').val(product_price);
-                        $('#currentid').val(product_id);
-                        $('#editImg').attr(product_image);
+            $('#editName').val(product_name);
+            $('#editDescription').val(product_description);
+            $('#currentid').val(product_id);
+            $('.editPrice').val(product_price);
+            $('#editImg').attr(product_image);
 
-                    });
+        });
 
-                </script>
-            @endsection
+    </script>
+@endsection
