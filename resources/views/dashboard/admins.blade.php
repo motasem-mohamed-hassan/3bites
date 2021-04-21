@@ -6,7 +6,13 @@
             <li>{{ $admin->name }}</li>
             <li>{{ $admin->email }}</li>
             <li>{{ $admin->is_super == true ? "superAdmin" : "Admin" }}</li>
-            <li>actions</li>
+            <li>
+                <form action="{{ route('d.change.permession', $admin->id) }}" method="post">
+                    @csrf
+                    @method('put')
+                    <button>Change</button>
+                </form>
+            </li>
         @endforeach
 
     </ul>

@@ -47,7 +47,7 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
 
     //admins
     Route::get('admins', 'DadminController@index')->name('admin.index');
-
+    Route::put('admins/change/{admin_id}', 'DadminController@change')->name('change.permession');
     Route::post('admins/register', 'DadminController@store')->name('admin.store');
 
 

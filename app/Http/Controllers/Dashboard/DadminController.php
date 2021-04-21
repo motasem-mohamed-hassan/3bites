@@ -16,6 +16,15 @@ class DadminController extends Controller
         return view('dashboard.admins', compact('admins'));
     }
 
+    public function change($admin_id)
+    {
+        $admin = Admin::find($admin_id);
+        $admin->is_super = !$admin->is_super;
+        $admin->save();
+        return back();
+    }
+
+
     public function store(Request $request)
     {
         $admin = new Admin();
@@ -26,4 +35,5 @@ class DadminController extends Controller
 
         return back();
     }
+
 }

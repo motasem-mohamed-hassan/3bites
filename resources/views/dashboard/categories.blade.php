@@ -1,8 +1,8 @@
 @extends('layouts.dashboard')
 @section('content')
-    <div class="px-2 row">
+    <div class="row px-2">
         <div class="col-md-12 ">
-            <div class="mt-3 callout callout-info w-25">
+            <div class="callout callout-info w-25 mt-3">
                 <h3>Categories</h3>
 
             </div>
@@ -10,35 +10,34 @@
             <div style="width: 15%;height:2px;background-color:black;margin:auto"></div> --}}
             <div class="row d-flex ">
                 @foreach ($categories as $category)
-                    <div class="px-1 my-1 col-md-2">
+                    <div class="col-md-2 px-1 my-1">
                         <div class="card h-100">
-                            <img src="{{ asset('storage/categories/' . $category->image) }}"
-                                class="card-img-top w-100 h-50" alt="...">
+                            <img src="{{ asset('storage/categories/' . $category->image) }}" class="card-img-top w-100 h-50"
+                                alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $category->name }}</h5>
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
                                 </p>
-                                <div class="button-group d-flex">
-                                    <button type="button" category_name="{{ $category->name }}"
-                                        category_description="{{ $category->description }}"
-                                        category_id="{{ $category->id }}" style='width:45%;height:30px'
-                                        class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
-                                        data-target="#editCategoryModal">
-                                        Update
-                                    </button>
-                                    @if ($category->id == 1)
-                                    @else
-                                        <form action="{{ route('d.category.delete', $category->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
+                                <form action="#" method="POST">
+                                    @csrf
+                                    <div class="button-group d-flex">
+                                        <button type="button" category_name="{{ $category->name }}"
+                                            category_description="{{ $category->description }}"
+                                            category_id="{{ $category->id }}" style='width:45%;height:30px'
+                                            class="editBtn btn btn-sm btn-primary mr-1 edit-category" data-toggle="modal"
+                                            data-target="#editCategoryModal">
+                                            Update
+                                        </button>
+                                        @if ($category->id == 1)
+                                        @else
                                             <button style='width:45%;height:30px' type="submit"
                                                 category_id="{{ $category->id }}"
-                                                class="ml-1 delete_btn btn btn-sm btn-danger">
+                                                class="delete_btn btn btn-sm ml-1 btn-danger">
                                                 Delete
                                             </button>
-                                        </form>
-                                    @endif
-                                </div>
+                                        @endif
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -92,8 +91,9 @@
         </div>
         <!-- create -->
         <div class="button-group d-flex">
-            <button type="button" id='addBtn' class="mr-1 addBtn btn btn-sm btn-primary add-category" data-toggle="modal"
-                data-target="#addCategoryModal">
+            <button type="button" id='addBtn' category_name_en="{{ $category->name_en }}"
+                category_name_ar="{{ $category->name_ar }}" category_id="{{ $category->id }}"
+                class="addBtn btn btn-sm btn-primary mr-1 add-category" data-toggle="modal" data-target="#addCategoryModal">
                 Add category
             </button>
             <div class="container py-3">
@@ -136,32 +136,9 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
 
-@endsection
+            @endsection
 
-@section('scripts')
-    <script>
-        $(document).on('click', '.editBtn', function(e) {
-            e.preventDefault();
-
-            var category_id = $(this).attr('category_id');
-            var category_name = $(this).attr('category_name');
-            var category_description = $(this).attr('category_description');
-            var category_image = ("image", $("#editImg")[0].files[0]);
-
-
-            // var category_image = $(this).
-            // var category_image = $('input[type=file]')[0].files[0];
-
-            $('#editName').val(category_name);
-            $('#editDescription').val(category_description);
-            $('#currentid').val(category_id);
-            $('#editImg').attr(category_image);
-
-        });
-    </script>
-@endsection
+            @section('scripts')
+            @endsection
