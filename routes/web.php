@@ -42,5 +42,13 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::put('product/update', 'DproductController@update')->name('product.update');
     Route::delete('product/delete/{id}', 'DproductController@destroy')->name('product.delete');
 
+    //users
+    Route::get('users', 'DuserController@index')->name('user.index');
+
+    //admins
+    Route::get('admins', 'DadminController@index')->name('admin.index');
+
+    Route::post('admins/register', 'DadminController@store')->name('admin.store');
+
 
 });

@@ -47,7 +47,7 @@
 
 
                   <li class="nav-item">
-                      <a href="pages/widgets.html" class="nav-link">
+                      <a href="{{ route('d.user.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-tree" style="color: white"></i>
                           <p style="color: white">
                               Users
@@ -58,10 +58,10 @@
 
 
                   <li class="nav-item">
-                      <a href="pages/widgets.html" class="nav-link">
+                      <a href="{{ route('d.admin.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-chart-pie" style="color: white"></i>
                           <p style="color: white">
-                              Categories
+                              Admins
                           </p>
                       </a>
                   </li>
@@ -77,7 +77,7 @@
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                           @csrf
                       </form>
-                  </li>        
+                  </li>
               </ul>
           </nav>
 

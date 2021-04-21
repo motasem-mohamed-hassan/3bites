@@ -18,16 +18,16 @@
                                 <h5 class="card-title">{{ $category->name }}</h5>
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
                                 </p>
-                                    <div class="button-group d-flex">
-                                        <button type="button" category_name="{{ $category->name }}"
-                                            category_description="{{ $category->description }}"
-                                            category_id="{{ $category->id }}" style='width:45%;height:30px'
-                                            class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
-                                            data-target="#editCategoryModal">
-                                            Update
-                                        </button>
-                                        @if ($category->id == 1)
-                                        @else
+                                <div class="button-group d-flex">
+                                    <button type="button" category_name="{{ $category->name }}"
+                                        category_description="{{ $category->description }}"
+                                        category_id="{{ $category->id }}" style='width:45%;height:30px'
+                                        class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
+                                        data-target="#editCategoryModal">
+                                        Update
+                                    </button>
+                                    @if ($category->id == 1)
+                                    @else
                                         <form action="{{ route('d.category.delete', $category->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
@@ -37,8 +37,8 @@
                                                 Delete
                                             </button>
                                         </form>
-                                        @endif
-                                    </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,8 +92,8 @@
         </div>
         <!-- create -->
         <div class="button-group d-flex">
-            <button type="button" id='addBtn'
-                class="mr-1 addBtn btn btn-sm btn-primary add-category" data-toggle="modal" data-target="#addCategoryModal">
+            <button type="button" id='addBtn' class="mr-1 addBtn btn btn-sm btn-primary add-category" data-toggle="modal"
+                data-target="#addCategoryModal">
                 Add category
             </button>
             <div class="container py-3">
@@ -144,4 +144,24 @@
 @endsection
 
 @section('scripts')
+    <script>
+        $(document).on('click', '.editBtn', function(e) {
+            e.preventDefault();
+
+            var category_id = $(this).attr('category_id');
+            var category_name = $(this).attr('category_name');
+            var category_description = $(this).attr('category_description');
+            var category_image = ("image", $("#editImg")[0].files[0]);
+
+
+            // var category_image = $(this).
+            // var category_image = $('input[type=file]')[0].files[0];
+
+            $('#editName').val(category_name);
+            $('#editDescription').val(category_description);
+            $('#currentid').val(category_id);
+            $('#editImg').attr(category_image);
+
+        });
+    </script>
 @endsection

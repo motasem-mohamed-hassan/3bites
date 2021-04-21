@@ -18,5 +18,14 @@ class AdminSeeder extends Seeder
             'password'      =>  Hash::make('123456789'),
             'is_super'      => true
         ]);
+
+        DB::table('admins')->insert([
+            'id'            =>  '2',
+            'name'          =>  'test',
+            'email'         =>  'test@admin.com',
+            'password'      =>  '11110000',
+            'is_super'      =>  false
+        ]);
+
     }
 }
