@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('send', 'HomeController@sendNotification'); //for notification
 
 
-Route::prefix('dashboard')->namespace('Dashboard')->as('d.')->group(function(){
+Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(function(){
 
     Route::get('/', 'DhomeController@index')->name('home');
 

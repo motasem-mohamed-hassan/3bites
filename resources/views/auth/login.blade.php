@@ -7,11 +7,11 @@
             <div class="card">
 
                 <div class="card-header" style="font-size: 25px">
-                    <img src="admin/dist/img/logo.png" style="width: 7%;margin-x:10px">
+                    <img src="{{ asset('admin/dist/img/logo.png') }}" style="width: 7%;margin-x:10px">
                     {{ __('Login') }}
                 </div>
 
-                <div class="card-body"  style="background-image:url('admin/dist/img/untitled-2.gif');size:100% 100% " >
+                <div class="card-body"  style="background-image:url('{{ asset('admin/dist/img/untitled-2.gif') }}');size:100% 100% " >
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
