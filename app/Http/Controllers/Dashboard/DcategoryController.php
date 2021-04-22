@@ -59,9 +59,10 @@ class DcategoryController extends Controller
      */
     public function update(Request $request, FlasherInterface $flasher)
     {
+
         $category = Category::find($request->id);
-        $category->name_en  =   $request->name_en;
-        $category->name_ar  =   $request->name_ar;
+        $category->name  =   $request->name;
+        $category->description  =   $request->description;
 
         if($request->hasFile('image')){
             File::delete('public/categories/'.$category->image);
@@ -76,6 +77,8 @@ class DcategoryController extends Controller
         }
 
         $category->save();
+
+        return back();
         $flasher->addFlash('Category Updated Successfully.');
         return response()->json([
             'status'    => 'success',
