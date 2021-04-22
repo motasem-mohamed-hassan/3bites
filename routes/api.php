@@ -16,20 +16,22 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::namespace('Api')->group(function(){
+    //infos
+    Route::get('infos', 'InfoController@index');
     //Categories
     Route::get('categories', 'CategoryController@index');
-    Route::post('categories', 'CategoryController@store');
+    // Route::post('categories', 'CategoryController@store');
     Route::get('category/{id}', 'CategoryController@show');
-    Route::put('category/update/{id}', 'CategoryController@update');
-    Route::delete('category/delete/{id}', 'CategoryController@destroy');
+    // Route::put('category/update/{id}', 'CategoryController@update');
+    // Route::delete('category/delete/{id}', 'CategoryController@destroy');
 
 
     //Products
     Route::get('products', 'ProductController@index');
-    Route::post('products', 'ProductController@store');
+    // Route::post('products', 'ProductController@store');
     Route::get('product/{id}', 'ProductController@show');
-    Route::put('product/update/{id}', 'ProductController@update');
-    Route::delete('product/delete/{id}', 'ProductController@destroy');
+    // Route::put('product/update/{id}', 'ProductController@update');
+    // Route::delete('product/delete/{id}', 'ProductController@destroy');
 
 
     Route::middleware('auth:api')->group(function(){
@@ -47,4 +49,3 @@ Route::namespace('Api')->group(function(){
 
 
 });
-

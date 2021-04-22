@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::with('products')->get();
+        $categories = Category::with('products')->where('id','!=', 1)->get();
 
         if($categories->isEmpty()){
             return response()->json([
@@ -26,19 +26,19 @@ class CategoryController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
-
-        return response()->json([
-            'status'    => true,
-            'msg'       => 'category created successfully',
-            'category'      => $category
-        ]);
-    }
+    // public function store(Request $request)
+    // {
+    //     $category = new Category();
+    //     $category->name = $request->name;
+    //     $category->description = $request->description;
+    //     $category->save();
+    //
+    //     return response()->json([
+    //         'status'    => true,
+    //         'msg'       => 'category created successfully',
+    //         'category'      => $category
+    //     ]);
+    // }
 
     public function show($id)
     {
@@ -59,47 +59,47 @@ class CategoryController extends Controller
     }
 
 
-    public function update(Request $request, $id)
-    {
-        $category = Category::find($id);
-        $category->name = $request->name;
-        $category->description = $request->description;
-        $category->save();
-
-        if(!$category){
-            return response()->json([
-                'status' => false,
-                'errNum' => 404,
-                'msg'    => 'category not found',
-            ]);
-        }else{
-            return response()->json([
-                'status'    => true,
-                'msg'       => 'category updated successfully',
-                'category'  => $category
-            ]);
-        }
-    }
-
-
-    public function destroy($id)
-    {
-        $category = Category::find($id);
-        $category->delete();
-
-        if(!$category){
-            return response()->json([
-                'status' => false,
-                'errNum' => 404,
-                'msg'   => 'category not found',
-            ]);
-        }else{
-            return response()->json([
-                'status' => true,
-                'msg' => 'category deleted successfully'
-            ]);
-        }
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->name = $request->name;
+    //     $category->description = $request->description;
+    //     $category->save();
+    //
+    //     if(!$category){
+    //         return response()->json([
+    //             'status' => false,
+    //             'errNum' => 404,
+    //             'msg'    => 'category not found',
+    //         ]);
+    //     }else{
+    //         return response()->json([
+    //             'status'    => true,
+    //             'msg'       => 'category updated successfully',
+    //             'category'  => $category
+    //         ]);
+    //     }
+    // }
+    //
+    //
+    // public function destroy($id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->delete();
+    //
+    //     if(!$category){
+    //         return response()->json([
+    //             'status' => false,
+    //             'errNum' => 404,
+    //             'msg'   => 'category not found',
+    //         ]);
+    //     }else{
+    //         return response()->json([
+    //             'status' => true,
+    //             'msg' => 'category deleted successfully'
+    //         ]);
+    //     }
+    // }
 
 
 

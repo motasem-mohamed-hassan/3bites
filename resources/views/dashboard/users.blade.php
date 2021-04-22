@@ -1,15 +1,5 @@
 @extends('layouts.dashboard')
 @section('content')
-
-    <ul>
-        @foreach ($users as $user)
-            <li>{{ $user->first_name }}</li>
-            <li>{{ $user->last_name }}</li>
-            <li>{{ $user->email }}</li>
-            <li>{{ $user->phone }}</li>
-        @endforeach
-
-    </ul> --}}
     <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
@@ -36,11 +26,10 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                      <th> User ID</th>
+                      <th>User ID</th>
                       <th>User name</th>
                       <th>Email</th>
                       <th>Phone </th>
-                      <th>Address</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -50,7 +39,6 @@
                             <td>{{ $user->first_name }}  {{ $user->last_name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
-                            <td>{{ $user->address }}</td>
                         </tr>
                         @endforeach
                   </table>
