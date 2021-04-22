@@ -31,6 +31,7 @@ class DadminController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->password = Hash::make($request->password);
+        $admin->is_super = $request->is_super;
         $admin->save();
 
         return back();

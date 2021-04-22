@@ -12,8 +12,8 @@
                 @foreach ($categories as $category)
                     <div class="col-md-2 px-1 my-1">
                         <div class="card h-100">
-                            <img src="{{ asset('storage/categories/' . $category->image) }}" class="card-img-top w-100 h-50"
-                                alt="...">
+                            <img src="{{ asset('storage/categories/' . $category->image) }}"
+                                class="card-img-top w-100 h-50" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $category->name }}</h5>
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
@@ -30,7 +30,7 @@
                                         </button>
                                         @if ($category->id == 1)
                                         @else
-                                            <button style='width:45%;height:30px' type="submit"
+                                            <button style='width:100%;height:30px' type="submit"
                                                 category_id="{{ $category->id }}"
                                                 class="delete_btn btn btn-sm ml-1 btn-danger">
                                                 Delete
@@ -65,11 +65,11 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Category name</label>
-                                <input type="text" id="editName_en" name="name_en" class="form-control">
+                                <input type="text" id="editName" name="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Category description</label>
-                                <input type="text" id="editName_ar" name="name_ar" class="form-control">
+                                <input type="text" id="editDescription" name="description" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
@@ -141,4 +141,25 @@
             @endsection
 
             @section('scripts')
+                <script>
+                    $(document).on('click', '.editBtn', function(e) {
+                        e.preventDefault();
+
+                        var category_id = $(this).attr('category_id');
+                        var category_name = $(this).attr('category_name');
+                        var category_description = $(this).attr('category_description');
+                        var category_image = ("image", $("#editImg")[0].files[0]);
+
+
+                        // var category_image = $(this).
+                        // var category_image = $('input[type=file]')[0].files[0];
+
+                        $('#editName').val(category_name);
+                        $('#editDescription').val(category_description);
+                        $('#currentid').val(category_id);
+                        $('#editImg').attr(category_image);
+
+                    });
+
+                </script>
             @endsection
