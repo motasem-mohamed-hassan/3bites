@@ -32,7 +32,7 @@
                                         <form action="{{ route('d.product.delete', $product->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button style='width:45%;height:30px' type="submit"
+                                            <button style='width:100%;height:30px' type="submit"
                                                 product_id="{{ $product->id }}"
                                                 class="ml-1 delete_btn btn btn-sm btn-danger">
                                                 Delete

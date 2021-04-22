@@ -18,6 +18,20 @@
                                 <h5 class="card-title">{{ $category->name }}</h5>
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
                                 </p>
+
+                                <form action="#" method="POST">
+                                    @csrf
+                                    <div class="button-group d-flex">
+                                        <button type="button" category_name="{{ $category->name }}"
+                                            category_description="{{ $category->description }}"
+                                            category_id="{{ $category->id }}" style='width:45%;height:30px'
+                                            class="editBtn btn btn-sm btn-primary mr-1 edit-category" data-toggle="modal"
+                                            data-target="#editCategoryModal">
+                                            Update
+                                        </button>
+                                        @if ($category->id == 1)
+                                        @else
+                                            <button style='width:100%;height:30px' type="submit"
                                 <div class="button-group d-flex">
                                     <button type="button"
                                         category_name="{{ $category->name }}"
@@ -69,11 +83,11 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Category name</label>
-                                <input type="text" id="editName_en" name="name_en" class="form-control">
+                                <input type="text" id="editName" name="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label>Category description</label>
-                                <input type="text" id="editName_ar" name="name_ar" class="form-control">
+                                <input type="text" id="editDescription" name="description" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
@@ -170,6 +184,29 @@
             $('#currentid').val(category_id);
             $('#editImg').attr(category_image);
 
+            @section('scripts')
+                <script>
+                    $(document).on('click', '.editBtn', function(e) {
+                        e.preventDefault();
+
+                        var category_id = $(this).attr('category_id');
+                        var category_name = $(this).attr('category_name');
+                        var category_description = $(this).attr('category_description');
+                        var category_image = ("image", $("#editImg")[0].files[0]);
+
+
+                        // var category_image = $(this).
+                        // var category_image = $('input[type=file]')[0].files[0];
+
+                        $('#editName').val(category_name);
+                        $('#editDescription').val(category_description);
+                        $('#currentid').val(category_id);
+                        $('#editImg').attr(category_image);
+
+                    });
+
+                </script>
+            @endsection
         });
     </script>
 @endsection
