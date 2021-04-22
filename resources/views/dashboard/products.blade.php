@@ -20,14 +20,8 @@
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p class="card-text">{{ $product->price }}</p>
                                     <div class="button-group d-flex">
-<<<<<<< HEAD
-                                        <button type="button"
-                                            product_name="{{ $product->name }}"
-                                            category_id="{{ $product->category_id }}" product_id="{{ $product->id }}"
-=======
                                         <button type="button" category_id="{{ $product->category_id }}"
                                             product_id="{{ $product->id }}" product_name="{{ $product->name }}"
->>>>>>> 5d4f7693ce9c46b3070a5969540d9f8de6dc01d6
                                             product_price="{{ $product->price }}" product_image="{{ $product->image }}"
                                             product_description="{{ $product->description }}"
                                             style='width:45%;height:30px'

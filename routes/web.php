@@ -32,7 +32,7 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::get('categories', 'DcategoryController@index')->name('category.index');
     Route::post('categories', 'DcategoryController@store')->name('category.store');
     // Route::get('category/{id}', 'DcategoryController@show')->name('category.store');
-    Route::put('category/update/{id}', 'DcategoryController@update')->name('category.update');
+    Route::put('category/update', 'DcategoryController@update')->name('category.update');
     Route::delete('category/delete/{id}', 'DcategoryController@destroy')->name('category.delete');
 
     //Products
