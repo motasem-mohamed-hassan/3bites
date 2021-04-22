@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-{{--
+
     <ul>
         @foreach ($users as $user)
             <li>{{ $user->first_name }}</li>
@@ -81,4 +81,5 @@
     });
 </script>
 
+    </ul>
 @endsection
