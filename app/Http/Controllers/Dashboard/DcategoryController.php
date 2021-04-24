@@ -46,7 +46,7 @@ class DcategoryController extends Controller
 
         $category->save();
 
-        $flasher->addFlash('Category Created Successfully.');
+        $flasher->addSuccess('Category Created Successfully.');
         return back();
     }
 
@@ -79,7 +79,7 @@ class DcategoryController extends Controller
         $category->save();
 
         return back();
-        $flasher->addFlash('Category Updated Successfully.');
+        $flasher->addSuccess('Category Updated Successfully.');
         return response()->json([
             'status'    => 'success',
             'msg'       => 'تم تعديل القسم بنجاح',
