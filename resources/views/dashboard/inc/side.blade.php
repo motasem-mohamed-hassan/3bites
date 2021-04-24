@@ -77,8 +77,8 @@
 
                   <li class="nav-item">
                       <a href="{{ route('d.info.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-chart-pie" style="color: white"></i>
-                          <p style="color: white">
+                          <i class="nav-icon fas fa-chart-pie"></i>
+                          <p>
                               Infos
                           </p>
                       </a>
