@@ -50,5 +50,10 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::put('admins/change/{admin_id}', 'DadminController@change')->name('change.permession');
     Route::post('admins/register', 'DadminController@store')->name('admin.store');
 
+    //infos
+    Route::get('info', 'DinfoController@index')->name('info.index');
+    Route::put('info', 'DinfoController@update')->name('info.update');
+
+
 
 });

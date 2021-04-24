@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 offset-2">
-        <form action="{{ route('dashboard.info.update') }}" method="post">
+        <form action="{{ route('d.info.update') }}" method="post">
             @csrf
             @method('put')
 
@@ -30,57 +30,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label> Address in english </label>
-                        <div class="input-group col-md-12">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ $info->location_en }}" name="location_en">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label> Address in arabic</label>
-                        <div class="input-group col-md-12">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-map-marker"></i></span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ $info->location_ar }}" name="location_ar">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Location link </label>
-                        <div class="input-group col-md-12">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-location-arrow"></i></span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ $info->location_link }}" name="location_link">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Whatsapp </label>
-                        <div class="input-group col-md-12">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fab fa-whatsapp"></i></span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ $info->whatsapp_number }}" name="whatsapp_number">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label>Facebook </label>
                         <div class="input-group col-md-12">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fab fa-facebook-f"></i></span>
                             </div>
                             <input type="text" class="form-control" value="{{ $info->facebook_link }}" name="facebook_link">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Twitter </label>
-                        <div class="input-group col-md-12">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fab fa-twitter"></i></span>
-                            </div>
-                            <input type="text" class="form-control" value="{{ $info->twitter_link }}" name="twitter_link">
                         </div>
                     </div>
                     <div class="form-group">
@@ -93,7 +48,16 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="تحديث">
+                        <label>Web</label>
+                        <div class="input-group col-md-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $info->web_link }}" name="web_link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Update">
                     </div>
                 </div>
 

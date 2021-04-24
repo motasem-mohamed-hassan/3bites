@@ -75,10 +75,19 @@
                       </a>
                   </li>
 
-                  {{-- <li class="nav-header"></li> --}}
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('logout') }}"
-                          onclick="event.preventDefault();
+                      <a href="{{ route('d.info.index') }}" class="nav-link">
+                          <i class="nav-icon fas fa-chart-pie" style="color: white"></i>
+                          <p style="color: white">
+                              Infos
+                          </p>
+                      </a>
+                  </li>
+
+
+                  <li class="nav-header">العمليات</li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                           <i class="nav-icon far fa-circle text-danger"></i>
                           Log Out
