@@ -11,6 +11,12 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('products')->where('id','!=', 1)->get();
+        foreach($categories as $category){
+            $category->image = asset('storage/categories/'. $category->image);
+            foreach($category->products as $product){
+                $product->image = asset('storage/products/'. $product->image);
+            }
+        }
 
         if($categories->isEmpty()){
             return response()->json([
@@ -43,6 +49,10 @@ class CategoryController extends Controller
     public function show($id)
     {
         $category = Category::with('products')->where('id', $id)->first();
+        $category->image = asset('storage/categories/'. $category->image);
+        foreach($category->products as $product){
+            $product->image =  asset('storage/products/'. $product->image);
+        }
 
         if(!$category){
             return response()->json([

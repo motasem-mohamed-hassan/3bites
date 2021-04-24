@@ -16,7 +16,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('category_id', '!=', 1)->inRandomOrder()->limit(10)->get();
-
+        foreach($products as $product){
+            $product->image = asset('storage/products/'. $product->image);
+        }
         if($products->isEmpty()){
             return response()->json([
                 'status' => true,
@@ -65,7 +67,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-
+        $product->image = asset('storage/products/'. $product->image);
         if(!$product){
             return response()->json([
                 'status' => false,

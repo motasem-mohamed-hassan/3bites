@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 offset-2">
-        <form action="{{ route('d.info.update') }}" method="post">
+        <form action="{{ route('d.info.update') }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('put')
 
@@ -17,7 +17,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
                             </div>
-                            <input type="text" class="form-control" value="{{ $info->phone }}" name="phone">
+                            <input type="text" class="form-control" required value="{{ $info->phone }}" name="phone"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">
                         </div>
                     </div>
                     <div class="form-group">
@@ -54,6 +55,33 @@
                                 <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                             </div>
                             <input type="text" class="form-control" value="{{ $info->web_link }}" name="web_link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Google play link</label>
+                        <div class="input-group col-md-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $info->google_link }}" name="google_link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Apple market link</label>
+                        <div class="input-group col-md-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            </div>
+                            <input type="text" class="form-control" value="{{ $info->apple_link }}" name="apple_link">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Banner</label>
+                        <div class="input-group col-md-12">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fab fa-instagram"></i></span>
+                            </div>
+                            <input type="file" class="form-control" value="{{ $info->banner }}" name="banner">
                         </div>
                     </div>
                     <div class="form-group">

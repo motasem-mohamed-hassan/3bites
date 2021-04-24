@@ -20,6 +20,9 @@ class CreateInfosTable extends Migration
             $table->string('facebook_link')->nullable();
             $table->string('instagram_link')->nullable();
             $table->string('web_link')->nullable();
+            $table->string('google_link')->nullable();
+            $table->string('apple_link')->nullable();
+            $table->string('banner')->nullable();
             $table->timestamps();
         });
     }
