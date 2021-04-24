@@ -120,16 +120,16 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Category name</label>
-                                        <input type="text" id="addName" name="name" class="form-control" value="">
+                                        <input type="text" id="addName" name="name" class="form-control" value="" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Category description</label>
-                                        <input type="text" id="addDescription" name="description" class="form-control" value="">
+                                        <input type="text" id="addDescription" name="description" class="form-control" value="" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> Category picture
-                                            <input type="file" name="image" required="required"
+                                            <input type="file" name="image" required
                                                 oninvalid="this.setCustomValidity('pick a photo ')"
                                                 onchange="this.setCustomValidity('')">
                                         </div>

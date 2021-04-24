@@ -11360,7 +11360,7 @@ body:not(.layout-fixed).layout-navbar-fixed.text-sm .wrapper .main-sidebar .side
 }
 
 .layout-top-nav .wrapper .main-header .brand-image {
-  margin-top: -.5rem;
+  /* margin-top: -.5rem; */
   margin-right: .2rem;
   height: 33px;
 }
@@ -31104,3 +31104,16 @@ a.text-muted:hover {
 }
 
 /*# sourceMappingURL=adminlte.css.map */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.main-sidebar:hover{
+    
+}

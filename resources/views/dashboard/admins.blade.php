@@ -104,11 +104,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Email</label>
-                                    <input type="text" id="addEmail" name="email" class="form-control" value="">
+                                    <input type="email" id="addEmail" name="email" class="form-control" value="">
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Password</label>
-                                    <input type="text" id="addStatus" name="password" class="form-control" value="">
+                                    <input type="Password" id="addStatus" name="password" class="form-control" value="">
                                 </div>
                             </div>
 

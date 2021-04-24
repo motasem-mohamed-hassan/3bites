@@ -78,12 +78,13 @@
                             </div>
                             <div class="form-group">
                                 <label>Product Price</label>
-                                <input type="text" name="price" class="form-control editPrice" value="">
+                                <input type="number" name="price" class="form-control editPrice" value="">
                             </div>
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
                                     <i class="fas fa-paperclip"></i> product picture
-                                    <input id="editImg" type="file" name="image">
+                                    <input id="editImg" type="file" name="image" onchange="loadFile(event)">
+                                    <p><img src="" id="output"  width="200" /></p>
                                 </div>
                             </div>
                         </div>
@@ -123,32 +124,38 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select category</label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="category_id">
-                                                <option desable selected>--Choce Category--</option>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="category_id" required >
+                                                <option selected hidden disabled value="">--Choose Category--</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Product name</label>
-                                        <input type="text" id="addName" name="name" class="form-control" value="">
+                                        <input type="text" id="addName" name="name" class="form-control" value="" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Product description</label>
-                                        <input type="text" id="addName_ar" name="description" class="form-control" value="">
+                                        <input type="text" id="addName_ar" name="description" class="form-control" value="" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Product price</label>
-                                        <input type="text" id="addName_ar" name="price" class="form-control" value="">
+                                        <input type="number" id="addName_ar" name="price" class="form-control" value="" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> product picture
-                                            <input type="file" name="image" required="required"
+                                            <input id="editImg" type="file" name="image" onchange="loadFile(event)">
+                                            <p><img id="output2"  width="200" /></p>
+                                        </div>
+                                        {{-- <div class="btn btn-info btn-file">
+                                            <i class="fas fa-paperclip"></i> product picture
+                                            <input type="file" name="image" required onchange="loadFile(event)"
                                                 oninvalid="this.setCustomValidity('pick a photo ')"
                                                 onchange="this.setCustomValidity('')">
-                                        </div>
+                                                <p><img id="output" width="200" /></p>
+                                        </div> --}}
                                     </div>
                                 </div>
 
@@ -178,6 +185,7 @@
             var product_image = ("image", $("#editImg")[0].files[0]);
 
 
+
             // var product_image = $(this).
             // var product_image = $('input[type=file]')[0].files[0];
 
@@ -185,9 +193,20 @@
             $('#editDescription').val(product_description);
             $('#currentid').val(product_id);
             $('.editPrice').val(product_price);
-            $('#editImg').attr(product_image);
+            $('#editImg').attr("src",product_image);
+            // $('#output').attr("src",product_image);
+            // $('#updated').attr(product_image);
+            //  document.getElementById('updated').src = URL.createObjectURL(event.target.files[0]);
 
         });
 
+    </script>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            var image2 = document.getElementById('output2');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image2.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
 @endsection
