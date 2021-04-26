@@ -40,7 +40,7 @@
     <section class="content">
         <div class="container-fluid">
             <table class="table table-bordered table-striped">
-                <tr class="bg-info">
+                <tr class="bg-dark">
                     <th>Admin ID</th>
                     <th>Name</th>
                     <th>Email</th>
@@ -58,7 +58,7 @@
                                 <form action="{{ route('d.change.permession', $admin->id) }}" method="post">
                                     @csrf
                                     @method('put')
-                                    <button>Change</button>
+                                    <button class="btn btn-dark">Change</button>
                                 </form>
                             </td>
                         </tr>
@@ -92,23 +92,23 @@
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Select role</label>
-                                    <select class="form-control" id="exampleFormControlSelect1" name="is_super">
-                                        <option selected disabled>---chose permession---</option>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="is_super" required>
+                                        <option selected disabled>---choose permession---</option>
                                         <option value="0">admin</option>
                                         <option value="1">super admin</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Name</label>
-                                    <input type="text" id="addName" name="name" class="form-control" value="">
+                                    <input type="text" id="addName" name="name" class="form-control" value="" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Email</label>
-                                    <input type="email" id="addEmail" name="email" class="form-control" value="">
+                                    <input type="email" id="addEmail" name="email" class="form-control" value="" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Admin Password</label>
-                                    <input type="Password" id="addStatus" name="password" class="form-control" value="">
+                                    <input type="Password" id="addStatus" name="password" class="form-control" value="" required>
                                 </div>
                             </div>
 

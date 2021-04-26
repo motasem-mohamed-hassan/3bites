@@ -45,14 +45,14 @@
                       </a>
                   </li>
 
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a href="{{ route('d.user.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-info" ></i>
                         <p >
                             Information
                         </p>
                     </a>
-                </li>
+                </li> --}}
 
 
                   <li class="nav-item">
@@ -77,9 +77,9 @@
 
                   <li class="nav-item">
                       <a href="{{ route('d.info.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-chart-pie"></i>
+                          <i class="nav-icon fas fa-info"></i>
                           <p>
-                              Infos
+                            Information
                           </p>
                       </a>
                   </li>
