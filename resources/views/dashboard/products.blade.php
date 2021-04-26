@@ -195,6 +195,7 @@
             $('.editPrice').val(product_price);
             $('#editImg').attr("src",product_image);
             // $('#output').attr("src",product_image);
+            // $('#output').attr("src",product_image);
             // $('#updated').attr(product_image);
             //  document.getElementById('updated').src = URL.createObjectURL(event.target.files[0]);
 

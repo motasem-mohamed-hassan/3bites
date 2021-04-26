@@ -25,7 +25,7 @@
                                         category_id="{{ $category->id }}"
                                         category_image="{{ $category->image }}"
                                         style='width:45%;height:30px'
-                                        class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
+                                        class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
                                         data-target="#editCategoryModal">
                                     Update
                                     </button>
@@ -78,10 +78,12 @@
                                 <label>Category description</label>
                                 <input type="text" id="editDescription" name="description" class="form-control" value="">
                             </div>
+
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
                                     <i class="fas fa-paperclip"></i> Category picture
-                                    <input type="file" id="editImg" name="image" >
+                                    <input id="editImg" type="file" name="image" onchange="loadFile(event)">
+                                    <p><img src="" id="output"  width="200" /></p>
                                 </div>
                             </div>
                         </div>
@@ -129,9 +131,8 @@
                                     <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> Category picture
-                                            <input type="file" name="image" required
-                                                oninvalid="this.setCustomValidity('pick a photo ')"
-                                                onchange="this.setCustomValidity('')">
+                                            <input id="editImg" type="file" name="image" onchange="loadFile(event)">
+                                            <p><img src="" id="output2"  width="200" /></p>
                                         </div>
                                     </div>
                                 </div>
@@ -158,13 +159,10 @@
 
             var category_id = $(this).attr('category_id');
             var category_name = $(this).attr('category_name');
+            // var category_price = $(this).attr('category_price');
             var category_description = $(this).attr('category_description');
             var category_image = ("image", $("#editImg")[0].files[0]);
 
-            console.log(category_id);
-            console.log(category_name);
-            console.log(category_description);
-            console.log(category_image);
 
 
             // var category_image = $(this).
@@ -173,8 +171,22 @@
             $('#editName').val(category_name);
             $('#editDescription').val(category_description);
             $('#currentid').val(category_id);
-            $('#editImg').attr(category_image);
+            // $('.editPrice').val(category_price);
+            $('#editImg').attr("src",category_image);
+            // $('#output').attr("src",category_image);
+            // $('#output').attr("src",category_image);
+            // $('#updated').attr(category_image);
+            //  document.getElementById('updated').src = URL.createObjectURL(event.target.files[0]);
 
         });
+
+    </script>
+    <script>
+        var loadFile = function(event) {
+            var image = document.getElementById('output');
+            var image2 = document.getElementById('output2');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            image2.src = URL.createObjectURL(event.target.files[0]);
+        };
     </script>
 @endsection
