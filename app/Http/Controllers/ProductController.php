@@ -43,56 +43,29 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
 
-        // $imageurl = $request->file('image');
-        // $imageurl->getClientOriginalName();
-        // $ext    = $imageurl->getClientOriginalExtension();
-        // $file   = date('YmdHis').rand(1,99999).'.'.$ext;
-        // $imageurl->storeAs('public/categories', $file);
-        // $product->image = $file;
+        $imageurl = $request->file('image');
+        $imageurl->getClientOriginalName();
+        $ext    = $imageurl->getClientOriginalExtension();
+        $file   = date('YmdHis').rand(1,99999).'.'.$ext;
+        $imageurl->storeAs('public/categories', $file);
+        $product->image = $file;
+
+
 
         $product->save();
 
         OneSignal::sendNotificationToAll(
-            "Some Message", 
-            $url = null, 
-            $data = null, 
-            $buttons = null, 
+            "Some Message",
+            $url = null,
+            $data = null,
+            $buttons = null,
             $schedule = null
         );
-    
+
 
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -136,4 +109,5 @@ class ProductController extends Controller
 
         return back();
     }
+
 }

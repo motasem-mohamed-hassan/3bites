@@ -35,39 +35,11 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(Request $request)
-    // {
-    //     $product = new Product();
-    //     $product->category_id   = $request->category_id;
-    //     $product->name          = $request->name;
-    //     $product->description   = $request->description;
-    //     $product->price         = $request->price;
-    //     $product->save();
-    //
-    //     return response()->json([
-    //         'status'    => true,
-    //         'msg'       => 'category created successfully',
-    //         'category'      => $product
-    //     ]);
-    //
-    // }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $product = Product::find($id);
         $product->image = asset('storage/products/'. $product->image);
+
         if(!$product){
             return response()->json([
                 'status' => false,
@@ -83,61 +55,11 @@ class ProductController extends Controller
 
     }
 
+    public function getextra($id)
+    {
+        $product = Product::find($id);
+        return $product->category->extras->groupBy('type');
+    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function update(Request $request, $id)
-    // {
-    //     $product = Product::find($id);
-    //     $product->name          = $request->name;
-    //     $product->description   = $request->description;
-    //     $product->price         = $request->price;
-    //     $product->save();
-    //
-    //     if(!$product){
-    //         return response()->json([
-    //             'status' => false,
-    //             'errNum' => 404,
-    //             'msg'    => 'product not found',
-    //         ]);
-    //     }else{
-    //         return response()->json([
-    //             'status'    => true,
-    //             'msg'       => 'product updated successfully',
-    //             'product'  => $product
-    //         ]);
-    //     }
-    //
-    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    // public function destroy($id)
-    // {
-    //     $product = Product::find($id);
-    //     $product->delete();
-    //
-    //     if(!$product){
-    //         return response()->json([
-    //             'status' => false,
-    //             'errNum' => 404,
-    //             'msg'   => 'product not found',
-    //         ]);
-    //     }else{
-    //         return response()->json([
-    //             'status' => true,
-    //             'msg' => 'product deleted successfully'
-    //         ]);
-    //     }
-    //
-    // }
 }

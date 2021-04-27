@@ -12,11 +12,18 @@ class CategoryController extends Controller
     {
         $categories = Category::with('products')->where('id','!=', 1)->get();
         foreach($categories as $category){
+            foreach($category->products as $product){
+                $product->sizes;
+            }
+        }
+
+        foreach($categories as $category){
             $category->image = asset('storage/categories/'. $category->image);
             foreach($category->products as $product){
                 $product->image = asset('storage/products/'. $product->image);
             }
         }
+
 
         if($categories->isEmpty()){
             return response()->json([

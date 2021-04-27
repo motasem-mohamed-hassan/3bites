@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Size extends Model
 {
+
+
     public function products()
     {
-        return $this->belongsToMany(Order::class)->withPivot(['quantity']);
+        return $this->belongsTo(Product::class);
     }
-
 }
