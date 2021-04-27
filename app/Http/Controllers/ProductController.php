@@ -50,17 +50,15 @@ class ProductController extends Controller
         $imageurl->storeAs('public/categories', $file);
         $product->image = $file;
 
-
-
         $product->save();
 
-        OneSignal::sendNotificationToAll(
-            "Some Message",
-            $url = null,
-            $data = null,
-            $buttons = null,
-            $schedule = null
-        );
+        // OneSignal::sendNotificationToAll(
+        //     "Some Message",
+        //     $url = null,
+        //     $data = null,
+        //     $buttons = null,
+        //     $schedule = null
+        // );
 
 
         return back();

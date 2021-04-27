@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use stdClass;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Size;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,6 +43,7 @@ class DproductController extends Controller
      */
     public function store(Request $request)
     {
+
         $product = new Product();
         $product->category_id   = $request->category_id;
         $product->name          = $request->name;
@@ -55,7 +58,22 @@ class DproductController extends Controller
         $product->image = $file;
         $product->save();
 
-        return back();
+        foreach(array_combine($request->size_names, $request->size_prices) as $name => $price){
+            $size = new Size();
+            $size->product_id = $product->id;
+            $size->name = $name;
+            $size->price = $price;
+            $size->save();
+        }
+
+        // $arr = [];
+        // for($i = 0; $i<$request->size_names; $i++) {
+        //     $object = new stdClass();
+        //     $object->name = $request->size_names[$i];
+        //     $object->price = $request->size_prices[$i];
+        //     $arr[] = $object;
+        // }
+        // return $arr;
 
     }
 

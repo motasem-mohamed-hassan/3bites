@@ -162,8 +162,8 @@
                                             </thead>
                                             <tbody  id="myTable">
                                                 <tr>
-                                                    <td><input type="text" id="addName_ar" name="size" class="form-control" value="small"></td>
-                                                    <td><input type="text" id="addName_ar" name="sizePrice" class="form-control" value="20" ></td>
+                                                    <td><input type="text" id="addName_ar" name="size_names[]" class="form-control" value="small"></td>
+                                                    <td><input type="text" id="addName_ar" name="size_prices[]" class="form-control" value="0" ></td>
                                                     <td><button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button></td>
                                                 </tr>
                                             </tbody>
@@ -244,8 +244,8 @@
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            cell1.innerHTML = `<input type="text" id="addName_ar" name="size" class="form-control" value="" required>`;
-            cell2.innerHTML = `<input type="number" id="addName_ar" name="sizePrice" class="form-control" value="" required>`;
+            cell1.innerHTML = `<input type="text" id="addName_ar" name="size_names[]" class="form-control" value="" required>`;
+            cell2.innerHTML = `<input type="number" id="addName_ar" name="size_prices[]" class="form-control" value="" required>`;
             cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
 
         }
