@@ -98,11 +98,11 @@
             cell1.innerHTML = `<input type="text" id="addName_ar" name="extraName" class="form-control" value="" required>`;
             cell2.innerHTML = `<input type="number" id="addName_ar" name="extraPrice" class="form-control" value="" required>`;
             cell3.innerHTML = `<input type="text" id="addName_ar" name="extraType" class="form-control" value="" required>`;
-            cell4.innerHTML = `<button type="submit" id="submitToUpdate" class="btn btn-primary">Update</button>`;
+            cell4.innerHTML = `<button type="submit" id="editExtraModal" class="btn btn-primary">Update</button>`;
             cell5.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
 
         }
-       
+
         function myDeleteFunction() {
             document.getElementById("myTable").deleteRow(0);
         }

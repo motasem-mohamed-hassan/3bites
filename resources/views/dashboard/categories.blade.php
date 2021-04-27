@@ -19,15 +19,13 @@
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
                                 </p>
                                 <div class="button-group d-flex">
-                                    <button type="button"
-                                        category_name="{{ $category->name }}"
+                                    <button type="button" category_name="{{ $category->name }}"
                                         category_description="{{ $category->description }}"
-                                        category_id="{{ $category->id }}"
-                                        category_image="{{ $category->image }}"
+                                        category_id="{{ $category->id }}" category_image="{{ $category->image }}"
                                         style='width:45%;height:30px'
                                         class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
                                         data-target="#editCategoryModal">
-                                    Update
+                                        Update
                                     </button>
                                     @if ($category->id == 1)
                                     @else
@@ -83,7 +81,7 @@
                                 <div class="btn btn-info btn-file">
                                     <i class="fas fa-paperclip"></i> Category picture
                                     <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                    <p><img src="" id="output"  width="200" /></p>
+                                    <p><img src="" id="output" width="200" /></p>
                                 </div>
                             </div>
                         </div>
@@ -91,8 +89,7 @@
                         <div class="modal-footer">
                             <input type="text" name="id" id="currentid" class="form-control" value="" hidden>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" id="submitToUpdate" class="btn btn-primary"
-                            >Update</button>
+                            <button type="submit" id="submitToUpdate" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -126,13 +123,26 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Category description</label>
-                                        <input type="text" id="addDescription" name="description" class="form-control" value="" required>
+                                        <input type="text" id="addDescription" name="description" class="form-control"
+                                            value="" required>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Select extra types</label>
+                                        <select class="custom-select" id="basic" multiple="multiple">
+                                            <option value="cheese">Cheese</option>
+                                            <option value="tomatoes">Tomatoes</option>
+                                            <option value="mozarella">Mozzarella</option>
+                                            <option value="mushrooms">Mushrooms</option>
+                                            <option value="pepperoni">Pepperoni</option>
+                                            <option value="onions">Onions</option>
+                                        </select>
+                                    </div>
+
                                     <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> Category picture
                                             <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                            <p><img src="" id="output2"  width="200" /></p>
+                                            <p><img src="" id="output2" width="200" /></p>
                                         </div>
                                     </div>
                                 </div>
@@ -154,6 +164,14 @@
 
 @section('scripts')
     <script>
+       $('#basic').multiselect({
+    templates: {
+        li: '<li><a href="javascript:void(0);"><label class="pl-2"></label></a></li>'
+    }
+});
+
+    </script>
+    <script>
         $(document).on('click', '.editBtn', function(e) {
             e.preventDefault();
 
@@ -172,7 +190,7 @@
             $('#editDescription').val(category_description);
             $('#currentid').val(category_id);
             // $('.editPrice').val(category_price);
-            $('#editImg').attr("src",category_image);
+            $('#editImg').attr("src", category_image);
             // $('#output').attr("src",category_image);
             // $('#output').attr("src",category_image);
             // $('#updated').attr(category_image);
@@ -188,5 +206,6 @@
             image.src = URL.createObjectURL(event.target.files[0]);
             image2.src = URL.createObjectURL(event.target.files[0]);
         };
+
     </script>
 @endsection
