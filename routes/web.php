@@ -54,6 +54,7 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::get('info', 'DinfoController@index')->name('info.index');
     Route::put('info', 'DinfoController@update')->name('info.update');
 
-
-
+    //test
+    Route::view('extras', 'dashboard.extras');
+    
 });

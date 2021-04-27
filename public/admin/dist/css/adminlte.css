@@ -31117,6 +31117,8 @@ input[type=number] {
 
 .content-wrapper{
     margin-top:0px !important;
+    padding: 7px !important;
+
 }
 
 .brand-link:hover{

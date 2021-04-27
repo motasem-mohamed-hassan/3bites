@@ -84,7 +84,7 @@
                                 <div class="btn btn-info btn-file">
                                     <i class="fas fa-paperclip"></i> product picture
                                     <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                    <p><img src="" id="output"  width="200" /></p>
+                                    <p><img src="" id="output" width="200" /></p>
                                 </div>
                             </div>
                         </div>
@@ -124,10 +124,11 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Select category</label>
-                                        <select class="form-control" id="exampleFormControlSelect1" name="category_id" required >
-                                                <option selected hidden disabled value="">--Choose Category--</option>
+                                        <select class="form-control" id="exampleFormControlSelect1" name="category_id"
+                                            required>
+                                            <option selected hidden disabled value="">--Choose Category--</option>
                                             @foreach ($categories as $category)
-                                                <option value="{{ $category->id }}" >{{ $category->name }}</option>
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -137,17 +138,42 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Product description</label>
-                                        <input type="text" id="addName_ar" name="description" class="form-control" value="" required>
+                                        <input type="text" id="addName_ar" name="description" class="form-control" value=""
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label>Product price</label>
-                                        <input type="number" id="addName_ar" name="price" class="form-control" value="" required>
+                                        <input type="number" id="addName_ar" name="price" class="form-control" value=""
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" id="addSize" class="btn btn-primary" onclick="myCreateFunction()">Add
+                                            size</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product sizes</label>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Size</th>
+                                                    <th scope="col">Price</th>
+                                                    <th scope="col">Delete item</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody  id="myTable">
+                                                <tr>
+                                                    <td><input type="text" id="addName_ar" name="size" class="form-control" value="small"></td>
+                                                    <td><input type="text" id="addName_ar" name="sizePrice" class="form-control" value="20" ></td>
+                                                    <td><button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> product picture
                                             <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                            <p><img id="output2"  width="200" /></p>
+                                            <p><img id="output2" width="200" /></p>
                                         </div>
                                         {{-- <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> product picture
@@ -193,7 +219,7 @@
             $('#editDescription').val(product_description);
             $('#currentid').val(product_id);
             $('.editPrice').val(product_price);
-            $('#editImg').attr("src",product_image);
+            $('#editImg').attr("src", product_image);
             // $('#output').attr("src",product_image);
             // $('#output').attr("src",product_image);
             // $('#updated').attr(product_image);
@@ -209,5 +235,24 @@
             image.src = URL.createObjectURL(event.target.files[0]);
             image2.src = URL.createObjectURL(event.target.files[0]);
         };
+
+    </script>
+    <script>
+        function myCreateFunction() {
+            var table = document.getElementById("myTable");
+            var row = table.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = `<input type="text" id="addName_ar" name="size" class="form-control" value="" required>`;
+            cell2.innerHTML = `<input type="number" id="addName_ar" name="sizePrice" class="form-control" value="" required>`;
+            cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
+
+        }
+
+        function myDeleteFunction() {
+            document.getElementById("myTable").deleteRow(0);
+        }
+
     </script>
 @endsection
