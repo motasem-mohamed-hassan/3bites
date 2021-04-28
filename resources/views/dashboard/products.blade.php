@@ -81,6 +81,29 @@
                                 <input type="number" name="price" class="form-control editPrice" value="">
                             </div>
                             <div class="form-group">
+                                <button type="button" id="addSize" class="btn btn-primary" onclick="myCreateFunction()">Add
+                                    size</button>
+                            </div>
+                            <div class="form-group">
+                                <label>Product sizes</label>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Size</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Delete item</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  id="myTable">
+                                        <tr>
+                                            <td><input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="small"></td>
+                                            <td><input type="text" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="0" ></td>
+                                            <td><button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="form-group">
                                 <div class="btn btn-info btn-file">
                                     <i class="fas fa-paperclip"></i> product picture
                                     <input id="editImg" type="file" name="image" onchange="loadFile(event)">
@@ -208,6 +231,10 @@
             var product_name = $(this).attr('product_name');
             var product_price = $(this).attr('product_price');
             var product_description = $(this).attr('product_description');
+            var product_size = $(this).attr('product_size');
+            var product_sizePrice = $(this).attr('product_sizePrice');
+            // var product_description = $(this).attr('product_description');
+            // var product_description = $(this).attr('product_description');
             var product_image = ("image", $("#editImg")[0].files[0]);
 
 
@@ -219,6 +246,8 @@
             $('#editDescription').val(product_description);
             $('#currentid').val(product_id);
             $('.editPrice').val(product_price);
+            $('.editSize').val(product_size);
+            $('.editSizePrice').val(product_sizePrice);
             $('#editImg').attr("src", product_image);
             // $('#output').attr("src",product_image);
             // $('#output').attr("src",product_image);
@@ -238,16 +267,17 @@
 
     </script>
     <script>
+        var i = 0 ;
         function myCreateFunction() {
             var table = document.getElementById("myTable");
-            var row = table.insertRow(0);
+            var row = table.insertRow(i+1);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            cell1.innerHTML = `<input type="text" id="addName_ar" name="size_names[]" class="form-control" value="" required>`;
-            cell2.innerHTML = `<input type="number" id="addName_ar" name="size_prices[]" class="form-control" value="" required>`;
+            cell1.innerHTML = `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
+            cell2.innerHTML = `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
             cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
-
+            i++
         }
 
         function myDeleteFunction() {

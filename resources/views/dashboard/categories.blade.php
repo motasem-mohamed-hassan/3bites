@@ -76,6 +76,23 @@
                                 <label>Category description</label>
                                 <input type="text" id="editDescription" name="description" class="form-control" value="">
                             </div>
+                            <div class="form-group">
+                                <div class="container">
+                                    <h2>Select extras</h2>
+                                    <div class="row">
+                                          <div class="col-md-12">
+                                              <select type="text" class="multiselect" multiple="multiple" role="multiselect">
+                                                <option value="0">extra1</option>
+                                                <option value="1">extra2</option>
+                                                <option value="2">extra3</option>
+                                                <option value="3">extra4</option>
+                                                <option value="4">extra5</option>
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                            </div>
 
                             <div class="form-group">
                                 <div class="btn btn-info btn-file">
