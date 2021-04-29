@@ -5,35 +5,35 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">تفاصيل الأوردر</h5>
+          <h5 class="modal-title"> Order details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div >
         <div   id="print">
             <div class="modal-body">
-                <h5>الحي</h5>
+                <h5>Aria</h5>
                 <p class="order_aria"></p>
                 <hr>
-                <h5>العنوان</h5>
+                <h5>Address</h5>
                 <p class="order_address"></p>
             </div>
             <div class="card">
                 <div class="card-header">
-                <h3 class="card-title">المنتجات</h3>
+                <h3 class="card-title">Items</h3>
                 </div>
                 <div class="card-body p-0">
                 <table class="table projects">
                     <thead>
                         <tr>
                             <th style="width: 15%">
-                                الطلب
+                                Item
                             </th>
                             <th style="width: 15%">
-                                العدد
+                                Number
                             </th>
                             <th style="width: 15%">
-                                السعر
+                                price
                             </th>
                         </tr>
                     </thead>
@@ -52,16 +52,16 @@
                     @csrf
                     <input type="text" name="id" class="form-control currentid" value="" hidden>
                     <div class="form-group">
-                        <label>القسم التابع له هذا المنتج</label>
+                        <label>  Item category  </label>
                         <select class="custom-select time" name="time">
-                            <option value="" selected disabled>--اختر الوقت المقدر للطلب--</option>
-                            <option value="15">15 دقيقة</option>
-                            <option value="30">30 دقيقة</option>
-                            <option value="45">45 دقيقة</option>
-                            <option value="60">60 دقيقة</option>
-                            <option value="75">75 دقيقة</option>
-                            <option value="90">85 دقيقة</option>
-                            <option value="120">120 دقيقة</option>
+                            <option value="" selected disabled>--  Estimated time --</option>
+                            <option value="15">15 Min</option>
+                            <option value="30">30 Min</option>
+                            <option value="45">45 Min</option>
+                            <option value="60">60 Min</option>
+                            <option value="75">75 Min</option>
+                            <option value="90">85 Min</option>
+                            <option value="120">120 Min</option>
                         </select>
                     </div>
 
@@ -70,7 +70,7 @@
                 <form action="" method="POST">
                     @csrf
                     <input type="text" name="id" class="form-control currentid" value="" hidden>
-                    <Button type="submit" class="btn btn-danger mb-2">الغاء</Button>
+                    <Button type="submit" class="btn btn-danger mb-2">Cancel</Button>
                 </form>
             </div>
         </div>
@@ -81,7 +81,7 @@
 <section class="content col-md-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title">قيد الانتظار</h3>
+        <h3 class="card-title">waiting </h3>
       </div>
       <div class="card-body p-0">
         <table class="table table-striped projects">
@@ -91,25 +91,25 @@
                         #
                     </th>
                     <th style="width: 15%">
-                        الاسم
+                        Name
                     </th>
                     <th style="width: 15%">
-                        الحي
+                        Area
                     </th>
                     <th style="width: 15%">
-                        التليفون
+                        Phone number
                     </th>
                     <th style="width: 10%">
-                        السعر
+                        Price
                     </th>
                     <th style="width: 10%" >
-                        خدمة التوصيل
+                        Delivery fees
                     </th>
                     <th style="width: 10%">
-                        الاجمالي
+                        Total
                     </th>
                     <th style="width: 15%">
-                        الوقت
+                        Time
                     </th>
                     <th style="width: 25%">
                     </th>

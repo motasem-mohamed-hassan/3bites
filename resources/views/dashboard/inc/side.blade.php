@@ -117,8 +117,8 @@
                   </li>
 
 
-                  <li class="nav-header">العمليات</li>
-                  <li class="nav-item">
+                  <li class="nav-header mb-5 pb-5"></li>
+                  <li class="nav-item mt-5 pt-5">
                       <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                           <i class="nav-icon far fa-circle text-danger"></i>

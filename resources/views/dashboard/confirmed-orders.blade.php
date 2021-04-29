@@ -5,14 +5,14 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">تفاصيل الأوردر</h5>
+          <h5 class="modal-title"> Order details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
             <div id="print">
                 <div class="modal-body">
-                    <h5>Aria</h5>
+                    <h5>Area</h5>
                     <p class="order_aria"></p>
                     <hr>
                     <h5>Address</h5>
