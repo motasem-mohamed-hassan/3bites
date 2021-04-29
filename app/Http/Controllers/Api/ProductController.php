@@ -18,6 +18,7 @@ class ProductController extends Controller
         $products = Product::where('category_id', '!=', 1)->inRandomOrder()->limit(10)->get();
         foreach($products as $product){
             $product->image = asset('storage/products/'. $product->image);
+            $product->sizes;
         }
         if($products->isEmpty()){
             return response()->json([
@@ -39,6 +40,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->image = asset('storage/products/'. $product->image);
+        $product->extras;
 
         if(!$product){
             return response()->json([

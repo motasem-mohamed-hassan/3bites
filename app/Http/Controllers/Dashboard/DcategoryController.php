@@ -20,8 +20,9 @@ class DcategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $extras = Extra::all()->unique('type');
 
-        return view('dashboard.categories', compact('categories'));
+        return view('dashboard.categories', compact('categories', 'extras'));
     }
 
 

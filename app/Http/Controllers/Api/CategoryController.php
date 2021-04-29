@@ -14,6 +14,7 @@ class CategoryController extends Controller
         foreach($categories as $category){
             foreach($category->products as $product){
                 $product->sizes;
+                $product->extras;
             }
         }
 
@@ -59,6 +60,7 @@ class CategoryController extends Controller
         $category->image = asset('storage/categories/'. $category->image);
         foreach($category->products as $product){
             $product->image =  asset('storage/products/'. $product->image);
+            $product->extras;
         }
 
         if(!$category){

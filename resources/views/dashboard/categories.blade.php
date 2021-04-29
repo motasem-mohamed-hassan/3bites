@@ -75,10 +75,10 @@
                                         <div class="form-group">
                                             <label>Select extras</label>
                                             <select class="select2bs4" pla multiple="multiple" name="extras[]"
-                                                  style="width: 100%;">
-                                                <option  value="Toppings">Toppings</option>
-                                                <option value="Dips">Dips</option>
-                                                <option value="Drinks">Drinks</option>
+                                                style="width: 100%;">
+                                                @foreach ($extras as $extra)
+                                                    <option value="{{ $extra->type }}">{{ $extra->type }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -153,9 +153,9 @@
                                                 <label>Select extras</label>
                                                 <select class="select2bs4" pla multiple="multiple" name="extras[]"
                                                     data-placeholder="Select a State" style="width: 100%;">
-                                                    <option value="Toppings">Toppings</option>
-                                                    <option value="Dips">Dips</option>
-                                                    <option value="Drinks">Drinks</option>
+                                                    @foreach ($extras as $extra)
+                                                        <option value="{{ $extra->type }}">{{ $extra->type }}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
 
