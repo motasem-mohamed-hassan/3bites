@@ -36,23 +36,55 @@
 
 
 
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a href="pages/widgets.html" class="nav-link">
                           <i class="nav-icon fas fa-edit"></i>
                           <p>
                               Orders
                           </p>
                       </a>
+                  </li> --}}
+                  <li class="nav-item has-treeview menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-edit"></i>
+                        <p>
+                            Orders
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview" style="display: block;">
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Orders waiting</p>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class="far fa-circle nav-icon"></i>
+                          <p>Orders finished</p>
+                        </a>
+                      </li>
+
+                    </ul>
                   </li>
 
                   <li class="nav-item">
                       <a href="{{ route('d.extra.index') }}" class="nav-link">
-                          <i class="nav-icon fas fa-info"></i>
+                          <i class="nav-icon fas fa-cart-plus"></i>
                           <p>
                               Extras
                           </p>
                       </a>
                   </li>
+
+                  <li class="nav-item">
+                    <a href="{{ route('d.points.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-award"></i>
+                        <p>
+                            Points
+                        </p>
+                    </a>
+                </li>
 
 
                   <li class="nav-item">

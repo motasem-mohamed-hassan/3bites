@@ -72,8 +72,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <button type="button" id="addSize" class="btn btn-primary"
-                                                    onclick="myCreateFunction()">Add
-                                                    size</button>
+                                                    onclick="myCreateFunction()">Add size</button>
                                             </div>
                                             <div class="form-group">
                                                 <label>Product sizes</label>
@@ -180,9 +179,8 @@
                                     <div class="form-group">
                                         <label>Product sizes</label>
                                         <div class="form-group">
-                                            <button type="button" id="addSize" class="btn btn-primary"
-                                                onclick="myCreateFunction()">Add
-                                                size</button>
+                                            <button type="button" id="addSize2" class="btn btn-primary"
+                                                onclick="myCreateFunction2()">Add size</button>
                                         </div>
                                         <table class="table">
                                             <thead>
@@ -192,14 +190,14 @@
                                                     <th scope="col">Delete item</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="myTable">
+                                            <tbody id="myTable2">
                                                 <tr>
                                                     <td><input type="text" id="addName_ar" name="size_names[]"
                                                             class="form-control" value="small"></td>
                                                     <td><input type="text" id="addName_ar" name="size_prices[]"
                                                             class="form-control" value="0"></td>
                                                     <td><button type="button" class="btn btn-danger"
-                                                            onclick="myDeleteFunction()">Delete</button></td>
+                                                            onclick="myDeleteFunction2()">Delete</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -235,15 +233,7 @@
 @endsection
 
 @section('scripts')
-    {{-- <script>
-        var loadFile = function(event) {
-            var image = document.getElementById('output');
-            var image2 = document.getElementById('output2');
-            image.src = URL.createObjectURL(event.target.files[0]);
-            image2.src = URL.createObjectURL(event.target.files[0]);
-        };
 
-    </script> --}}
     <script>
         var i = 0;
 
@@ -258,11 +248,40 @@
             cell2.innerHTML =
                 `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
             cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
-            i++
+            i++;
+            console.log(i);
         }
 
         function myDeleteFunction() {
-            document.getElementById("myTable").deleteRow(0);
+            document.getElementById("myTable").deleteRow(i);
+            i--;
+            console.log(i);
+        }
+
+    </script>
+
+    <script>
+        var i2 = 0;
+
+        function myCreateFunction2() {
+            var table = document.getElementById("myTable2");
+            var row = table.insertRow(i2 + 1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML =
+                `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
+            cell2.innerHTML =
+                `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
+            cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction2()">Delete</button>`;
+            i2++;
+            console.log(i2);
+        }
+
+        function myDeleteFunction2() {
+            document.getElementById("myTable2").deleteRow(i2);
+            i2--;
+            console.log(i2);
         }
 
     </script>

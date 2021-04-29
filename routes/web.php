@@ -61,5 +61,9 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::put('extras/update/{extra_id}', 'DextraController@update')->name('extra.update');
     Route::delete('extras/delete/{extra_id}', 'DextraController@delete')->name('extra.delete');
 
+    //pointss
+    Route::get('points', 'DpointsController@index')->name('points.index');
+    Route::put('points', 'DpointsController@update')->name('points.update');
+
 
 });
