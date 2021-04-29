@@ -23,11 +23,11 @@ class CreateOrdersTable extends Migration
             $table->string('lati')->nullable();
             $table->enum('type', ['pickup', 'delivery ']);
             $table->boolean('confirm')->default(0);
-            $table->decimal('products_price', 10, 2)->nullable();
-            $table->decimal('hst', 10, 2)->nullable();
+            $table->decimal('products_price', 10, 2);
+            $table->decimal('hst', 10, 2);
             $table->decimal('tip', 10, 2)->nullable();
             $table->decimal('delivery_cost', 10, 2)->nullable();
-            $table->decimal('total', 10, 2)->nullable();
+            $table->decimal('total', 10, 2);
             $table->timestamps();
         });
     }

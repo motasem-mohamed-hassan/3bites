@@ -20,6 +20,13 @@ class OrderController extends Controller
         $order->lang = $request->lang;
         $order->lati = $request->lati;
         $order->type = $request->type;
+
+        $order->products_price = $request->products_price;
+        $order->hst = $request->hst;
+        $order->tip = $request->tip;
+        $order->delivery_cost = $request->delivery_cost;
+        $order->total = $request->total;
+
         $order->save();
 
         foreach ($request->products as $product) {
@@ -31,6 +38,8 @@ class OrderController extends Controller
             $p->size_name = $product->size_name;
             $p->size_price = $product->size_price;
             $p->quantity = $product->quantity;
+            $p->extras_price = $product->extras_price;
+            $p->total = $product->total;
             $p->save();
             foreach ($product->extras as $extra) {
                 $e = new Oextra();
@@ -39,16 +48,7 @@ class OrderController extends Controller
                 $e->price = $extra->price;
                 $e->save();
             }
-            $p->extras_price = $p->oextras->sum('price');
-            $p->total = $product->total;
-            $p->update();
         }
-        $order->products_price = $request->products_price;
-        $order->hst = $request->hst;
-        $order->tip = $request->tip;
-        $order->delivery_cost = $request->delivery_cost;
-        $order->total = $request->total;
-        $order->update();
 
         //Notification
         // $admin = Admin::get();
