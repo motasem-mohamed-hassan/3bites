@@ -56,5 +56,6 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
 
     //test
     Route::view('extras', 'dashboard.extras');
-    
+    Route::view('loyal', 'dashboard.loyal');
+
 });

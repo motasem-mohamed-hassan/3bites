@@ -80,17 +80,18 @@
                                 <div class="container">
                                     <h2>Select extras</h2>
                                     <div class="row">
-                                          <div class="col-md-12">
-                                              <select type="text" class="multiselect" multiple="multiple" role="multiselect">
+                                        <div class="col-md-12">
+                                            <select id="editExtra" type="text" class="multiselect" multiple="multiple"
+                                                role="multiselect">
                                                 <option value="0">extra1</option>
                                                 <option value="1">extra2</option>
                                                 <option value="2">extra3</option>
                                                 <option value="3">extra4</option>
                                                 <option value="4">extra5</option>
-                                              </select>
-                                          </div>
-                                      </div>
-                                  </div>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -147,17 +148,18 @@
                                         <div class="container">
                                             <h2>Select extras</h2>
                                             <div class="row">
-                                                  <div class="col-md-12">
-                                                      <select type="text" class="multiselect" multiple="multiple" role="multiselect">
+                                                <div class="col-md-12">
+                                                    <select type="text" class="multiselect" multiple="multiple"
+                                                        role="multiselect" id="extra">
                                                         <option value="0">extra1</option>
                                                         <option value="1">extra2</option>
-                                                        <option value="2" >extra3</option>
+                                                        <option value="2">extra3</option>
                                                         <option value="3">extra4</option>
                                                         <option value="4">extra5</option>
-                                                      </select>
-                                                  </div>
-                                              </div>
-                                          </div>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
 
@@ -191,26 +193,22 @@
         $(document).on('click', '.editBtn', function(e) {
             e.preventDefault();
 
+            var select = document.getElementById('extra');
+            var selected = [...select.options]
+                .filter(option => option.selected)
+                .map(option => option.value);
             var category_id = $(this).attr('category_id');
             var category_name = $(this).attr('category_name');
-            // var category_price = $(this).attr('category_price');
             var category_description = $(this).attr('category_description');
+            // var category_extra = $(this).attr('category_extra');
             var category_image = ("image", $("#editImg")[0].files[0]);
+            console.log(selected,category_name);
 
-
-
-            // var category_image = $(this).
-            // var category_image = $('input[type=file]')[0].files[0];
-
+            $('#currentid').val(category_id);
             $('#editName').val(category_name);
             $('#editDescription').val(category_description);
-            $('#currentid').val(category_id);
-            // $('.editPrice').val(category_price);
+            // $('#editExtra').val(category_extra);
             $('#editImg').attr("src", category_image);
-            // $('#output').attr("src",category_image);
-            // $('#output').attr("src",category_image);
-            // $('#updated').attr(category_image);
-            //  document.getElementById('updated').src = URL.createObjectURL(event.target.files[0]);
 
         });
 
@@ -646,7 +644,7 @@
                                         $.each($('li', this.$ul), $.proxy(function(index,
                                             element) {
                                             var value = $('input', element)
-                                            .val();
+                                                .val();
                                             if (value != this.options
                                                 .selectAllValue) {
                                                 var text = $('label', element)
@@ -655,7 +653,7 @@
                                                     .val();
                                                 if (value && text && value !=
                                                     this.options.selectAllValue
-                                                    ) {
+                                                ) {
                                                     // by default lets assume that element is not
                                                     // interesting for this search
                                                     var showElement = false;
@@ -684,7 +682,7 @@
                                                         .toLowerCase().indexOf(
                                                             this.query
                                                             .toLowerCase()) > -1
-                                                        ) {
+                                                    ) {
                                                         showElement = true;
                                                     } else if (filterCandidate
                                                         .indexOf(this.query) > -
