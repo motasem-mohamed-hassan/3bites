@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Category;
+use App\Extra;
 use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,9 @@ class DcategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $extras = Extra::all()->unique('type');
 
-        return view('dashboard.categories', compact('categories'));
+        return view('dashboard.categories', compact('categories', 'extras'));
     }
 
 
@@ -45,6 +47,10 @@ class DcategoryController extends Controller
 
 
         $category->save();
+        foreach ($request->extras as $type) {
+            $extras = Extra::where('type', $type)->get();
+            $category->extras()->attach($extras);
+        }
 
         $flasher->addSuccess('Category Created Successfully.');
         return back();
@@ -57,10 +63,10 @@ class DcategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FlasherInterface $flasher)
+    public function update(Request $request, $category_id, FlasherInterface $flasher)
     {
 
-        $category = Category::find($request->id);
+        $category = Category::find($category_id);
         $category->name  =   $request->name;
         $category->description  =   $request->description;
 
@@ -77,13 +83,8 @@ class DcategoryController extends Controller
         }
 
         $category->save();
-
-        return back();
         $flasher->addSuccess('Category Updated Successfully.');
-        return response()->json([
-            'status'    => 'success',
-            'msg'       => 'تم تعديل القسم بنجاح',
-        ]);
+        return back();
 
     }
 

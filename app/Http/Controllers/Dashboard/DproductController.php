@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Size;
 use stdClass;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
+use Flasher\Prime\FlasherInterface;
 use App\Http\Controllers\Controller;
-use App\Size;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -41,7 +42,7 @@ class DproductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, FlasherInterface $flasher)
     {
 
         $product = new Product();
@@ -66,15 +67,8 @@ class DproductController extends Controller
             $size->save();
         }
 
-        // $arr = [];
-        // for($i = 0; $i<$request->size_names; $i++) {
-        //     $object = new stdClass();
-        //     $object->name = $request->size_names[$i];
-        //     $object->price = $request->size_prices[$i];
-        //     $arr[] = $object;
-        // }
-        // return $arr;
-
+        $flasher->addSuccess('Product Created Successfully.');
+        return back();
     }
 
     /**
@@ -84,9 +78,9 @@ class DproductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $product_id, FlasherInterface $flasher)
     {
-        $product = Product::find($request->id);
+        $product = Product::find($product_id);
         $product->name          = $request->name;
         $product->description   = $request->description;
         $product->price         = $request->price;
@@ -102,9 +96,10 @@ class DproductController extends Controller
                 $imageurl->storeAs('public/products', $file);
             $product->image = $file;
         }
+        $product->update();
 
-        $product->save();
-
+        
+        $flasher->addSuccess('Product Updated Successfully.');
         return back();
     }
 
@@ -114,7 +109,7 @@ class DproductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id ,FlasherInterface $flasher)
     {
         $product = Product::find($id);
         File::delete('public/products/'.$product->image);
@@ -122,6 +117,7 @@ class DproductController extends Controller
 
         $product->delete();
 
+        $flasher->addInfo('Product Deleted!');
         return back();
     }
 }

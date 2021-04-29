@@ -32,14 +32,15 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::get('categories', 'DcategoryController@index')->name('category.index');
     Route::post('categories', 'DcategoryController@store')->name('category.store');
     // Route::get('category/{id}', 'DcategoryController@show')->name('category.store');
-    Route::put('category/update', 'DcategoryController@update')->name('category.update');
+    Route::put('category/update/{category_id}', 'DcategoryController@update')->name('category.update');
     Route::delete('category/delete/{id}', 'DcategoryController@destroy')->name('category.delete');
 
     //Products
     Route::get('products', 'DproductController@index')->name('product.index');
     Route::post('products', 'DproductController@store')->name('product.store');
+
     // Route::get('product/{id}', 'DproductController@show');
-    Route::put('product/update', 'DproductController@update')->name('product.update');
+    Route::put('product/update/{product_id}', 'DproductController@update')->name('product.update');
     Route::delete('product/delete/{id}', 'DproductController@destroy')->name('product.delete');
 
     //users
@@ -54,8 +55,11 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::get('info', 'DinfoController@index')->name('info.index');
     Route::put('info', 'DinfoController@update')->name('info.update');
 
-    //test
-    Route::view('extras', 'dashboard.extras');
-    Route::view('loyal', 'dashboard.loyal');
+    //Extras
+    Route::get('extras', 'DextraController@index')->name('extra.index');
+    Route::post('extras', 'DextraController@store')->name('extra.store');
+    Route::put('extras/update/{extra_id}', 'DextraController@update')->name('extra.update');
+    Route::delete('extras/delete/{extra_id}', 'DextraController@delete')->name('extra.delete');
+
 
 });

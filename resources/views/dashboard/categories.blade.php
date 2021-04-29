@@ -1,4 +1,7 @@
 @extends('layouts.dashboard')
+@section('css')
+
+@endsection
 @section('content')
     <div class="px-2 row">
         <div class="col-md-12 ">
@@ -19,12 +22,9 @@
                                 <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
                                 </p>
                                 <div class="button-group d-flex">
-                                    <button type="button" category_name="{{ $category->name }}"
-                                        category_description="{{ $category->description }}"
-                                        category_id="{{ $category->id }}" category_image="{{ $category->image }}"
-                                        style='width:45%;height:30px'
+                                    <button type="button" style='width:45%;height:30px'
                                         class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
-                                        data-target="#editCategoryModal">
+                                        data-target="#editCategoryModal{{ $category->id }}">
                                         Update
                                     </button>
                                     @if ($category->id == 1)
@@ -43,145 +43,150 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <!-- edit -->
+                    {{-- Update Modal --}}
+                    <div class="modal" tabindex="-1" role="dialog" id="editCategoryModal{{ $category->id }}">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Update category</h5>
 
-    <div class="container py-3">
-        <div class="modal" tabindex="-1" role="dialog" id="editCategoryModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Update category</h5>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
 
 
-                    <form action="{{ route('d.category.update') }}" id="updateForm" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('put')
+                                <form action="{{ route('d.category.update', $category->id) }}" id="updateForm"
+                                    method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('put')
 
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Category name</label>
-                                <input type="text" id="editName" name="name" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label>Category description</label>
-                                <input type="text" id="editDescription" name="description" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <div class="container">
-                                    <h2>Select extras</h2>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <select id="editExtra" type="text" class="multiselect" multiple="multiple"
-                                                role="multiselect">
-                                                <option value="0">extra1</option>
-                                                <option value="1">extra2</option>
-                                                <option value="2">extra3</option>
-                                                <option value="3">extra4</option>
-                                                <option value="4">extra5</option>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Category name</label>
+                                            <input type="text" id="editName" name="name" class="form-control"
+                                                value="{{ $category->name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Category description</label>
+                                            <input type="text" id="editDescription" name="description" class="form-control"
+                                                value="{{ $category->description }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select extras</label>
+                                            <select class="select2bs4" pla multiple="multiple" name="extras[]"
+                                                style="width: 100%;">
+                                                @foreach ($extras as $extra)
+                                                    <option value="{{ $extra->type }}">{{ $extra->type }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                            <label>Category Image</label>
+                                            <div class="">
+                                                <input type="file" class="dropify" name="image"
+                                                    data-default-file="{{ asset('storage/categories/' . $category->image) }}"
+                                                    data-height="200" />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                            </div>
-
-                            <div class="form-group">
-                                <div class="btn btn-info btn-file">
-                                    <i class="fas fa-paperclip"></i> Category picture
-                                    <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                    <p><img src="" id="output" width="200" /></p>
-                                </div>
+                                    <div class="modal-footer">
+                                        <input type="text" name="id" id="currentid" class="form-control" value="" hidden>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" id="submitToUpdate" class="btn btn-primary">Update</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
+                    </div>
+                @endforeach
+                {{-- End Update Modal --}}
+                <!-- create -->
+                <div class="button-group d-flex">
+                    <button type="button" id='addBtn' class="mr-1 addBtn btn btn-sm btn-primary add-category"
+                        data-toggle="modal" data-target="#addCategoryModal">
+                        Add category
+                    </button>
+                    <div class="container py-3">
+                        <div class="modal" tabindex="-1" role="dialog" id="addCategoryModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Add new category</h5>
 
-                        <div class="modal-footer">
-                            <input type="text" name="id" id="currentid" class="form-control" value="" hidden>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" id="submitToUpdate" class="btn btn-primary">Update</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- create -->
-        <div class="button-group d-flex">
-            <button type="button" id='addBtn' class="mr-1 addBtn btn btn-sm btn-primary add-category" data-toggle="modal"
-                data-target="#addCategoryModal">
-                Add category
-            </button>
-            <div class="container py-3">
-                <div class="modal" tabindex="-1" role="dialog" id="addCategoryModal">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Add new category</h5>
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-
-                            <form action="{{ route('d.category.store') }}" id="updateForm" method="post"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label>Category name</label>
-                                        <input type="text" id="addName" name="name" class="form-control" value="" required>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Category description</label>
-                                        <input type="text" id="addDescription" name="description" class="form-control"
-                                            value="" required>
-                                    </div>
-                                    <div class="form-group">
+
+                                    <form action="{{ route('d.category.store') }}" id="updateForm" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Category name</label>
+                                                <input type="text" id="addName" name="name" class="form-control" value=""
+                                                    required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Category description</label>
+                                                <input type="text" id="addDescription" name="description"
+                                                    class="form-control" value="" required>
+                                            </div>
+                                            {{-- <div class="form-group">
                                         <div class="container">
                                             <h2>Select extras</h2>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <select type="text" class="multiselect" multiple="multiple"
-                                                        role="multiselect" id="extra">
-                                                        <option value="0">extra1</option>
-                                                        <option value="1">extra2</option>
-                                                        <option value="2">extra3</option>
-                                                        <option value="3">extra4</option>
-                                                        <option value="4">extra5</option>
+                                                    <select type="text" name="extras[]" class="multiselect"
+                                                        multiple="multiple" role="multiselect">
+                                                        <option value="1">extra1</option>
+                                                        <option value="2">extra2</option>
+                                                        <option value="3">extra3</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div> --}}
+                                            <div class="form-group">
+                                                <label>Select extras</label>
+                                                <select class="select2bs4" pla multiple="multiple" name="extras[]"
+                                                    data-placeholder="Select a State" style="width: 100%;">
+                                                    @foreach ($extras as $extra)
+                                                        <option value="{{ $extra->type }}">{{ $extra->type }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
 
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="btn btn-info btn-file">
-                                            <i class="fas fa-paperclip"></i> Category picture
-                                            <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                            <p><img src="" id="output2" width="200" /></p>
+                                            {{-- <div class="form-group">
+                                                <div class="btn btn-info btn-file">
+                                                    <i class="fas fa-paperclip"></i> Category picture
+                                                    <input id="editImg" type="file" name="image" onchange="loadFile(event)">
+                                                    <p><img src="" id="output2" width="200" /></p>
+                                                </div>
+                                            </div> --}}
+                                            <div class="form-group">
+                                                <label>Category Image</label>
+                                                <div class="">
+                                                    <input type="file" class="dropify" name="image" data-height="200" />
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                    <button type="submit" id="submitToUpdate" class="btn btn-primary">Add</button>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            <button type="submit" id="submitToUpdate" class="btn btn-primary">Add</button>
+                                        </div>
                                 </div>
+                                </form>
+                            </div>
                         </div>
-                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -189,31 +194,7 @@
 
 @section('scripts')
 
-    <script>
-        $(document).on('click', '.editBtn', function(e) {
-            e.preventDefault();
-
-            var select = document.getElementById('extra');
-            var selected = [...select.options]
-                .filter(option => option.selected)
-                .map(option => option.value);
-            var category_id = $(this).attr('category_id');
-            var category_name = $(this).attr('category_name');
-            var category_description = $(this).attr('category_description');
-            // var category_extra = $(this).attr('category_extra');
-            var category_image = ("image", $("#editImg")[0].files[0]);
-            console.log(selected,category_name);
-
-            $('#currentid').val(category_id);
-            $('#editName').val(category_name);
-            $('#editDescription').val(category_description);
-            // $('#editExtra').val(category_extra);
-            $('#editImg').attr("src", category_image);
-
-        });
-
-    </script>
-    <script>
+    {{-- <script>
         var loadFile = function(event) {
             var image = document.getElementById('output');
             var image2 = document.getElementById('output2');
@@ -221,9 +202,9 @@
             image2.src = URL.createObjectURL(event.target.files[0]);
         };
 
-    </script>
+    </script> --}}
 
-    <script>
+    {{-- <script>
         ! function($) {
 
             "use strict"; // jshint ;_;
@@ -915,6 +896,18 @@
             });
 
         }(window.jQuery);
+
+    </script> --}}
+
+    <script>
+        $(function() {
+            $('.select2').select2()
+
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+        })
 
     </script>
 
