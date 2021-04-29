@@ -81,6 +81,12 @@ class DcategoryController extends Controller
                 $imageurl->storeAs('public/categories', $file);
             $category->image = $file;
         }
+        $category->extras()->detach();
+        foreach ($request->extras as $type) {
+            $extras = Extra::where('type', $type)->get();
+            $category->extras()->attach($extras);
+        }
+
 
         $category->save();
         $flasher->addSuccess('Category Updated Successfully.');

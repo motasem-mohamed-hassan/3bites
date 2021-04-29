@@ -45,27 +45,27 @@
                       </a>
                   </li> --}}
                   <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-edit"></i>
-                        <p>
-                            Orders
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview" style="display: block;">
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Orders waiting</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Orders finished</p>
-                        </a>
-                      </li>
+                      <a href="#" class="nav-link">
+                          <i class="nav-icon fas fa-edit"></i>
+                          <p>
+                              Orders
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview" style="display: block;">
+                          <li class="nav-item">
+                              <a href="{{ route('d.order.waiting') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Orders waiting</p>
+                              </a>
+                          </li>
+                          <li class="nav-item">
+                              <a href="{{ route('d.order.confirmed') }}" class="nav-link">
+                                  <i class="far fa-circle nav-icon"></i>
+                                  <p>Orders Confirmed</p>
+                              </a>
+                          </li>
 
-                    </ul>
+                      </ul>
                   </li>
 
                   <li class="nav-item">
@@ -78,13 +78,13 @@
                   </li>
 
                   <li class="nav-item">
-                    <a href="{{ route('d.points.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-award"></i>
-                        <p>
-                            Points
-                        </p>
-                    </a>
-                </li>
+                      <a href="{{ route('d.points.index') }}" class="nav-link">
+                          <i class="nav-icon fas fa-award"></i>
+                          <p>
+                              Points
+                          </p>
+                      </a>
+                  </li>
 
 
                   <li class="nav-item">

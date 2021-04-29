@@ -22,7 +22,6 @@ Route::namespace('Api')->group(function(){
     Route::get('infos', 'InfoController@index');
     //Categories
     Route::get('categories', 'CategoryController@index');
-    // Route::post('categories', 'CategoryController@store');
     Route::get('category/{id}', 'CategoryController@show');
 
 
@@ -32,11 +31,14 @@ Route::namespace('Api')->group(function(){
 
     Route::middleware('auth:api')->group(function(){
 
-
         Route::post('/logout', 'AuthController@logout');
     });
 
     Route::get('extrabyproductid/{id}', 'ProductController@getextra');
+
+    //Orders
+    Route::post('orders/store', 'OrderController@store_order');
+
     Route::post('/register', 'AuthController@register');
     Route::post('/login', 'AuthController@login');
 

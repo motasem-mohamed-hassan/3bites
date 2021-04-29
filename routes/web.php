@@ -65,5 +65,8 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::get('points', 'DpointsController@index')->name('points.index');
     Route::put('points', 'DpointsController@update')->name('points.update');
 
+    //orders
+    Route::view('waiting', 'dashboard.waiting-orders')->name('order.waiting');
+    Route::view('confirmed', 'dashboard.confirmed-orders')->name('order.confirmed');
 
 });
