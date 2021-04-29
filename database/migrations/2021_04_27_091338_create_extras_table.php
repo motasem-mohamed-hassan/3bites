@@ -17,7 +17,7 @@ class CreateExtrasTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('price', 10, 2);
-            $table->enum('type', ['1', '2', '3']);
+            $table->enum('type', ['Toppings', 'Dips ', 'Drinks']);
             $table->timestamps();
         });
     }

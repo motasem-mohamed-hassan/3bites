@@ -20,13 +20,9 @@
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p class="card-text">{{ $product->price }}</p>
                                     <div class="button-group d-flex">
-                                        <button type="button" category_id="{{ $product->category_id }}"
-                                            product_id="{{ $product->id }}" product_name="{{ $product->name }}"
-                                            product_price="{{ $product->price }}" product_image="{{ $product->image }}"
-                                            product_description="{{ $product->description }}"
-                                            style='width:45%;height:30px'
+                                        <button type="button" style='width:45%;height:30px'
                                             class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
-                                            data-target="#editproductModal">
+                                            data-target="#editproductModal{{ $product->id }}">
                                             Update
                                         </button>
                                         <form action="{{ route('d.product.delete', $product->id) }}" method="POST">
@@ -42,6 +38,88 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="modal" tabindex="-1" role="dialog" id="editproductModal{{ $product->id }}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Update product</h5>
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <form action="{{ route('d.product.update', $product->id) }}" id="updateForm"
+                                        method="post" enctype="multipart/form-data">
+                                        @csrf
+                                        @method('put')
+
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label>Product name</label>
+                                                <input type="text" id="editName" name="name" class="form-control"
+                                                    value="{{ $product->name }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product description</label>
+                                                <input type="text" id="editDescription" name="description"
+                                                    class="form-control" value="{{ $product->description }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product Price</label>
+                                                <input type="number" name="price" class="form-control editPrice"
+                                                    value="{{ $product->price }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="button" id="addSize" class="btn btn-primary"
+                                                    onclick="myCreateFunction()">Add
+                                                    size</button>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product sizes</label>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Size</th>
+                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Delete item</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="myTable">
+                                                        <tr>
+                                                            <td><input type="text" id="addName_ar" name="size_names[]"
+                                                                    class="form-control editSize" value="small"></td>
+                                                            <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                                    class="form-control editSizePrice" value="0"></td>
+                                                            <td><button type="button" class="btn btn-danger"
+                                                                    onclick="myDeleteFunction()">Delete</button></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product Image</label>
+                                                <div class="">
+                                                    <input type="file"
+                                                        data-default-file="{{ asset('storage/products/' . $product->image) }}"
+                                                        class="dropify" name="image" data-height="200" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <input type="text" name="id" id="currentid" class="form-control" value=""
+                                                hidden>
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" id="submitToUpdate"
+                                                class="btn btn-primary">Update</button>
+                                        </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
                     @endforeach
                 </div>
             @endforeach
@@ -51,76 +129,6 @@
     <!-- edit -->
 
     <div class="container py-3">
-        <div class="modal" tabindex="-1" role="dialog" id="editproductModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Update product</h5>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <form action="{{ route('d.product.update') }}" id="updateForm" method="post"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('put')
-
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Product name</label>
-                                <input type="text" id="editName" name="name" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label>Product description</label>
-                                <input type="text" id="editDescription" name="description" class="form-control" value="">
-                            </div>
-                            <div class="form-group">
-                                <label>Product Price</label>
-                                <input type="number" name="price" class="form-control editPrice" value="">
-                            </div>
-                            <div class="form-group">
-                                <button type="button" id="addSize" class="btn btn-primary" onclick="myCreateFunction()">Add
-                                    size</button>
-                            </div>
-                            <div class="form-group">
-                                <label>Product sizes</label>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Size</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Delete item</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody  id="myTable">
-                                        <tr>
-                                            <td><input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="small"></td>
-                                            <td><input type="text" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="0" ></td>
-                                            <td><button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="form-group">
-                                <div class="btn btn-info btn-file">
-                                    <i class="fas fa-paperclip"></i> product picture
-                                    <input id="editImg" type="file" name="image" onchange="loadFile(event)">
-                                    <p><img src="" id="output" width="200" /></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal-footer">
-                            <input type="text" name="id" id="currentid" class="form-control" value="" hidden>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" id="submitToUpdate" class="btn btn-primary">Update</button>
-                        </div>
-                </div>
-                </form>
-            </div>
-        </div>
         <!-- create -->
         <div class="button-group d-flex">
             <button type="button" id='addBtn' {{-- product_name_en="{{ $product->name_en }}"
@@ -170,11 +178,12 @@
                                             required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="button" id="addSize" class="btn btn-primary" onclick="myCreateFunction()">Add
-                                            size</button>
-                                    </div>
-                                    <div class="form-group">
                                         <label>Product sizes</label>
+                                        <div class="form-group">
+                                            <button type="button" id="addSize" class="btn btn-primary"
+                                                onclick="myCreateFunction()">Add
+                                                size</button>
+                                        </div>
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -183,29 +192,32 @@
                                                     <th scope="col">Delete item</th>
                                                 </tr>
                                             </thead>
-                                            <tbody  id="myTable">
+                                            <tbody id="myTable">
                                                 <tr>
-                                                    <td><input type="text" id="addName_ar" name="size_names[]" class="form-control" value="small"></td>
-                                                    <td><input type="text" id="addName_ar" name="size_prices[]" class="form-control" value="0" ></td>
-                                                    <td><button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button></td>
+                                                    <td><input type="text" id="addName_ar" name="size_names[]"
+                                                            class="form-control" value="small"></td>
+                                                    <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                            class="form-control" value="0"></td>
+                                                    <td><button type="button" class="btn btn-danger"
+                                                            onclick="myDeleteFunction()">Delete</button></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <div class="btn btn-info btn-file">
                                             <i class="fas fa-paperclip"></i> product picture
                                             <input id="editImg" type="file" name="image" onchange="loadFile(event)">
                                             <p><img id="output2" width="200" /></p>
                                         </div>
-                                        {{-- <div class="btn btn-info btn-file">
-                                            <i class="fas fa-paperclip"></i> product picture
-                                            <input type="file" name="image" required onchange="loadFile(event)"
-                                                oninvalid="this.setCustomValidity('pick a photo ')"
-                                                onchange="this.setCustomValidity('')">
-                                                <p><img id="output" width="200" /></p>
-                                        </div> --}}
+                                    </div> --}}
+                                    <div class="form-group">
+                                        <label>Product Image</label>
+                                        <div class="">
+                                            <input type="file" class="dropify" name="image" data-height="200" />
+                                        </div>
                                     </div>
+
                                 </div>
 
                                 <div class="modal-footer">
@@ -223,41 +235,7 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(document).on('click', '.editBtn', function(e) {
-            e.preventDefault();
-
-            var product_id = $(this).attr('product_id');
-            var product_name = $(this).attr('product_name');
-            var product_price = $(this).attr('product_price');
-            var product_description = $(this).attr('product_description');
-            var product_size = $(this).attr('product_size');
-            var product_sizePrice = $(this).attr('product_sizePrice');
-            // var product_description = $(this).attr('product_description');
-            // var product_description = $(this).attr('product_description');
-            var product_image = ("image", $("#editImg")[0].files[0]);
-
-
-
-            // var product_image = $(this).
-            // var product_image = $('input[type=file]')[0].files[0];
-
-            $('#editName').val(product_name);
-            $('#editDescription').val(product_description);
-            $('#currentid').val(product_id);
-            $('.editPrice').val(product_price);
-            $('.editSize').val(product_size);
-            $('.editSizePrice').val(product_sizePrice);
-            $('#editImg').attr("src", product_image);
-            // $('#output').attr("src",product_image);
-            // $('#output').attr("src",product_image);
-            // $('#updated').attr(product_image);
-            //  document.getElementById('updated').src = URL.createObjectURL(event.target.files[0]);
-
-        });
-
-    </script>
-    <script>
+    {{-- <script>
         var loadFile = function(event) {
             var image = document.getElementById('output');
             var image2 = document.getElementById('output2');
@@ -265,17 +243,20 @@
             image2.src = URL.createObjectURL(event.target.files[0]);
         };
 
-    </script>
+    </script> --}}
     <script>
-        var i = 0 ;
+        var i = 0;
+
         function myCreateFunction() {
             var table = document.getElementById("myTable");
-            var row = table.insertRow(i+1);
+            var row = table.insertRow(i + 1);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
-            cell1.innerHTML = `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
-            cell2.innerHTML = `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
+            cell1.innerHTML =
+                `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
+            cell2.innerHTML =
+                `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
             cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
             i++
         }
