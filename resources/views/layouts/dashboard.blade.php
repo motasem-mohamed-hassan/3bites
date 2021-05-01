@@ -84,7 +84,17 @@
     <script src="{{ asset('admin/plugins/fancyuploder/jquery.fancy-fileupload.js') }}"></script>
     <script src="{{ asset('admin/plugins/fancyuploder/fancy-uploader.js') }}"></script>
 
+    <script>
+
+        setInterval(function() {
+            $('#countNotification').load(window.location.href + " #countNotification")
+            $('#refreshNotification').load(window.location.href + " #refreshNotification")
+        }, 1000);
+
+    </script>
     @flasher_render
+
+
 </body>
 
 </html>

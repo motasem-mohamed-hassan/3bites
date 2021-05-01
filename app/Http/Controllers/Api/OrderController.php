@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Admin;
+use App\Order;
 use App\Oextra;
 use App\Oproduct;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\OrderNotification;
+use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
 {
     public function store_order(Request $request)
     {
         $order = new Order();
-        $order->user_id = Auth::id();
+        $order->user_id = $request->user_id;
         $order->user_name = $request->user_name;
         $order->user_phone = $request->user_phone;
         $order->user_email = $request->user_email;
         $order->lang = $request->lang;
         $order->lati = $request->lati;
+        $order->address = $request->address;
         $order->type = $request->type;
 
         $order->products_price = $request->products_price;
@@ -32,32 +37,33 @@ class OrderController extends Controller
         foreach ($request->products as $product) {
             $p = new Oproduct();
             $p->order_id = $order->id;
-            $p->product_id = $product->product_id;
-            $p->name = $product->name;
-            $p->price = $product->price;
-            $p->size_name = $product->size_name;
-            $p->size_price = $product->size_price;
-            $p->quantity = $product->quantity;
-            $p->extras_price = $product->extras_price;
-            $p->total = $product->total;
+            $p->product_id = $product['product_id'];
+            $p->name = $product['name'];
+            $p->price = $product['price'];
+            $p->size_name = $product['size_name'];
+            $p->size_price = $product['size_price'];
+            $p->quantity = $product['quantity'];
+            $p->extras_price = $product['extras_price'];
+            $p->total = $product['total'];
             $p->save();
-            foreach ($product->extras as $extra) {
+            foreach ($product['extras'] as $extra) {
                 $e = new Oextra();
                 $e->oproduct_id = $p->id;
-                $e->extra_name = $extra->extra_name;
-                $e->price = $extra->price;
+                $e->extra_name = $extra['extra_name'];
+                $e->price = $extra['price'];
+                $e->type = $extra['type'];
                 $e->save();
             }
         }
 
-        //Notification
-        // $admin = Admin::get();
-        // Notification::send($admin, new NewOrder($order));
+        //notification
+        $admin = Admin::get();
+        Notification::send($admin, new OrderNotification($order));
 
         return response()->json([
             'status'    => true,
             'msg'       => 'Order stored successfully',
-            'category'      => $order
+            'order'      => $order
         ]);
 
     }

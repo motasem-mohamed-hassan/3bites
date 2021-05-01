@@ -19,6 +19,7 @@
         "laravel/passport": "7.5.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "2.4",
+        "lcobucci/jwt": "3.3.3",
         "php-flasher/flasher-laravel": "^0.1.12"
     },
     "require-dev": {

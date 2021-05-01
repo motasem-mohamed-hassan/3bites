@@ -19,9 +19,10 @@ class CreateOrdersTable extends Migration
             $table->string('user_name');
             $table->string('user_phone');
             $table->string('user_email');
-            $table->string('lang')->nullable();
-            $table->string('lati')->nullable();
-            $table->enum('type', ['pickup', 'delivery ']);
+            $table->text('address');
+            $table->string('lang');
+            $table->string('lati');
+            $table->enum('type', ['pickup', 'delivery '])->nullable();
             $table->boolean('confirm')->default(0);
             $table->decimal('products_price', 10, 2);
             $table->decimal('hst', 10, 2);

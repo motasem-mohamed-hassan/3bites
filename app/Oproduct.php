@@ -10,8 +10,8 @@ class Oproduct extends Model
     {
         return $this->belongsTo(Order::class);
     }
-    
-    public function oextra()
+
+    public function oextras()
     {
         return $this->hasMany(Oextra::class);
     }

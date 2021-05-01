@@ -22,7 +22,7 @@ class CreateOproductsTable extends Migration
             $table->string('size_name');
             $table->decimal('size_price', 10, 2);
             $table->unsignedInteger('quantity');
-            $table->extras_price('subtotal', 10, 2)->nullable();
+            $table->decimal('extras_price', 10, 2);
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });

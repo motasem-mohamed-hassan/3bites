@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOextrasTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateOextrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('oextras', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('oproduct_id')->constrained();
-            $table->string('extra_name');
-            $table->decimal('price', 10, 2);
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateOextrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oextras');
+        Schema::dropIfExists('notifications');
     }
 }

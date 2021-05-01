@@ -26,8 +26,8 @@
       </form> --}}
 
       <!-- Right navbar links -->
-       <ul class="ml-auto navbar-nav">
-        {{--  <!-- Messages Dropdown Menu -->
+      <ul class="ml-auto navbar-nav">
+          {{-- <!-- Messages Dropdown Menu -->
           <li class="nav-item dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#">
                   <i class="far fa-comments"></i>
@@ -89,27 +89,31 @@
           <li class="nav-item dropdown">
               <a class="nav-link" data-toggle="dropdown" href="#">
                   <i class="far fa-bell"></i>
-                  <span class="badge badge-warning navbar-badge">15</span>
+                  <div id="countNotification">
+
+                      <span
+                          class="badge badge-warning navbar-badge">{{ Auth::guard('admin')->user()->unreadNotifications->count() }}</span>
+                  </div>
               </a>
-              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                  <span class="dropdown-item dropdown-header">15 Notifications</span>
+              <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="width:400px">
+                  <span class="dropdown-item dropdown-header">
+                      Notifications</span>
+                      <div id="refreshNotification">
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">
-                      <i class="mr-2 fas fa-envelope"></i> 4 new messages
-                      <span class="float-right text-sm text-muted">3 mins</span>
-                  </a>
+                  <div class="dropdown-item">
+                      @foreach (Auth::guard('admin')->user()->unreadNotifications as $notification)
+                          <i class="fas fa-file mr-2">
+                              <span> {{ $notification->data['title'] }}</span>
+                              <span> {{ $notification->data['user'] }}</span><br>
+                          </i>
+                          <span
+                              class="float-right text-sm text-muted">{{ $notification->created_at->format('h:i A') }}</span>
+                          <br>
+                      @endforeach
+                  </div>
+                </div>
                   <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">
-                      <i class="mr-2 fas fa-users"></i> 8 friend requests
-                      <span class="float-right text-sm text-muted">12 hours</span>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item">
-                      <i class="mr-2 fas fa-file"></i> 3 new reports
-                      <span class="float-right text-sm text-muted">2 days</span>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                  <a href="{{ route('d.order.waiting') }}" class="dropdown-item dropdown-footer">Go to orders page</a>
               </div>
           </li>
           {{-- <li class="nav-item">
