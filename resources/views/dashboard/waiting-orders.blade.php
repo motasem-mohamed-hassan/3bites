@@ -13,7 +13,7 @@
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
-                            <th style="width: 10%">
+                            <th style="width: 5%">
                                 #
                             </th>
                             <th style="width: 15%">
@@ -29,9 +29,13 @@
                                 Total
                             </th>
                             <th style="width: 15%">
-                                Create at
+                                Created at
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 20%">
+                                <form action="{{ route('d.order.confirmAll') }}" method="post">
+                                    @csrf
+                                    <button type="submit" class="btn btn-info">Approve All</button>
+                                </form>
                             </th>
                         </tr>
                     </thead>
@@ -58,8 +62,13 @@
                                         {{ $order->created_at }}
                                     </td>
                                     <td class="project-actions text-right">
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                            data-target=".bd-example-modal-lg{{ $order->id }}">Order Details</button>
+                                        <form action="{{ route('d.order.confirm', $order->id) }}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                data-target=".bd-example-modal-lg{{ $order->id }}">Order Details</button>
+                                            <button type="submit" class="btn btn-success">Approve</button>
+                                        </form>
                                     </td>
                                 </tr>
 
@@ -109,10 +118,11 @@
                                                                     <small>{{ $extra->extra_name }}</small>
                                                                     <small>(+{{ $extra->price }})</small><br>
                                                                 @endforeach
+                                                                <small>note: {{ $product->note }}</small><br>
                                                             </div>
 
                                                             <div class="col-md-2">
-                                                                {{ $product->price }}
+                                                                {{ $product->total }}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -120,15 +130,32 @@
                                                 @endforeach
                                                 <div class="container col-md-12">
                                                     <div class="row">
-                                                        <div class="col-md-3">
-                                                            total:
+                                                        <div class="col-md-1">
+
                                                         </div>
-                                                        <div class="col-md-4">
-                                                            {{ $order->total }}
+
+                                                        <div class="col-md-6">
+                                                            HST:
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{ $order->hst }}
                                                         </div>
                                                     </div>
                                                 </div>
 
+                                                <div class="container col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            total:
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{ $order->total }}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,65 +174,5 @@
 @endsection
 
 @section('scripts')
-
-    <script>
-        $(document).on('click', '.detailsbtn', function(e) {
-            e.preventDefault();
-
-            var order_id = $(this).attr('order_id');
-            var order_aria = $(this).attr('order_aria');
-            var order_address = $(this).attr('order_address');
-            var order_products = $(this).attr('order_products');
-            var order_deleviry_cost = $(this).attr('order_deleviry_cost');
-            var order_total = $(this).attr('order_total');
-
-            $('#myTable').empty();
-            $.each(JSON.parse(order_products), function(indexInArray, product) {
-                $(myTable).append(`
-                                                            <tr>
-                                                                <th>
-                                                                    product.name_ar
-                                                                </th>
-                                                                <th>
-                                                                    product.pivot.quantity
-                                                                </th>
-                                                                <th>
-                                                                    product.price
-                                                                </th>
-                                                            </tr>
-                                                        `);
-            });
-
-            $('#foot').empty();
-            $('#foot').append(`
-                                                        <tr>
-                                                            <th>
-                                                                خدمة التوصيل
-                                                            </th>
-                                                            <th>
-                                                            </th>
-                                                            <th>
-                                                                ${order_deleviry_cost}
-                                                            </th>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>
-                                                                الاجمالي
-                                                            </th>
-                                                            <th>
-                                                            </th>
-                                                            <th>
-                                                                ${order_total}
-                                                            </th>
-                                                        </tr>
-
-                                                    `);
-
-            $('.order_aria').html(order_aria);
-            $('.order_address').html(order_address);
-            $('.currentid').val(order_id);
-        });
-
-    </script>
 
 @endsection

@@ -45,6 +45,7 @@ class OrderController extends Controller
             $p->quantity = $product['quantity'];
             $p->extras_price = $product['extras_price'];
             $p->total = $product['total'];
+            $p->note = $product['note'];
             $p->save();
             foreach ($product['extras'] as $extra) {
                 $e = new Oextra();

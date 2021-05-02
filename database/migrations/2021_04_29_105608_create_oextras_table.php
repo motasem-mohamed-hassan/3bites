@@ -15,7 +15,7 @@ class CreateOextrasTable extends Migration
     {
         Schema::create('oextras', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('oproduct_id')->constrained();
+            $table->foreignId('oproduct_id')->constrained()->onDelete('cascade');
             $table->string('extra_name');
             $table->decimal('price', 10, 2);
             $table->string('type');

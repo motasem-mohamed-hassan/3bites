@@ -15,7 +15,7 @@ class CreateOproductsTable extends Migration
     {
         Schema::create('oproducts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->foreignId('product_id')->constrained();
             $table->string('name');
             $table->decimal('price', 10, 2);
@@ -24,6 +24,7 @@ class CreateOproductsTable extends Migration
             $table->unsignedInteger('quantity');
             $table->decimal('extras_price', 10, 2);
             $table->decimal('total', 10, 2);
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }
