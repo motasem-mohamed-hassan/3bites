@@ -13,11 +13,13 @@ use App\Notifications\OrderNotification;
 use App\Product;
 use App\User;
 use Illuminate\Support\Facades\Notification;
+use Mockery\Undefined;
 
 class OrderController extends Controller
 {
     public function store_order(Request $request)
     {
+
         $order = new Order();
 
         $order->user_id = $request->user_id;
@@ -43,6 +45,12 @@ class OrderController extends Controller
             $p->product_id = $product['product_id'];
             $p->name = $product['name'];
             $p->price = $product['price'];
+            if($request->has('user_id')){
+                if(isset($product['gift_points'])){
+                    $user = User::find($request->user_id);
+                    $user->decrement('points', $product['gift_points']);
+                }
+            }
             $p->size_name = $product['size_name'];
             $p->size_price = $product['size_price'];
             $p->quantity = $product['quantity'];
@@ -59,9 +67,12 @@ class OrderController extends Controller
                 $e->save();
             }
             if($request->has('user_id')){
-                $user = User::find($request->user_id);
-                $product = Product::find($product['product_id']);
-                $user->increment('points', $product->points);
+                if(isset($product['gift_points'])){
+                }else{
+                    $user = User::find($request->user_id);
+                    $product = Product::find($product['product_id']);
+                    $user->increment('points', $product->points);
+                }
             }
         }
 

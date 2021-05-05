@@ -17,6 +17,7 @@ class CreateGiftsTable extends Migration
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->bigInteger('points');
+            $table->string('order_count');
             $table->timestamps();
         });
     }
