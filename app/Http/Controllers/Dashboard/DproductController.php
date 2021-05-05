@@ -45,7 +45,6 @@ class DproductController extends Controller
     public function store(Request $request, FlasherInterface $flasher)
     {
 
-
         $product = new Product();
         $product->category_id   = $request->category_id;
         $product->name          = $request->name;

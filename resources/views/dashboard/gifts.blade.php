@@ -34,10 +34,10 @@
 
                                 <div class="button-group d-flex position-absolute" style="bottom: 5px">
                                     <button type="button" style='width:100%'
-                                    class="mr-1 editBtn btn btn-primary edit-category" data-toggle="modal"
-                                    data-target="#editGiftModal{{ $gift->id }}">
-                                    Update
-                                </button>
+                                        class="mr-1 editBtn btn btn-primary edit-category" data-toggle="modal"
+                                        data-target="#editGiftModal{{ $gift->id }}">
+                                        Update
+                                    </button>
                                     <form action="{{ route('d.gift.delete', $gift->id) }}" method="post">
                                         @method('delete')
                                         @csrf
@@ -56,7 +56,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title">Default Modal</h4>
+                                    <h4 class="modal-title">Update gift</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -67,7 +67,8 @@
                                         <div class="form-group">
                                             <label>Select Category</label>
                                             <select class="form-control select_category" required>
-                                                <option disabled selected value="{{ $gift->product->category_id }}">{{ $gift->product->category->name }}</option>
+                                                <option disabled selected value="{{ $gift->product->category_id }}">
+                                                    {{ $gift->product->category->name }}</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                 @endforeach
@@ -76,13 +77,15 @@
                                         <div class="form-group">
                                             <label>Select Product</label>
                                             <select class="form-control select_product" name="product_id" required>
-                                                <option disabled selected value="{{ $gift->product->id}}">{{$gift->product->name}}</option>
+                                                <option disabled selected value="{{ $gift->product->id }}">
+                                                    {{ $gift->product->name }}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Points</label>
-                                            <input type="number" name="points" value="{{ $gift->points }}" class="form-control" id="exampleInputPassword1"
-                                                placeholder="Points" required>
+                                            <input type="number" name="points" value="{{ $gift->points }}"
+                                                class="form-control" id="exampleInputPassword1" placeholder="Points"
+                                                required>
                                         </div>
                                 </div>
                                 <div class="modal-footer justify-content-between">
@@ -111,7 +114,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Default Modal</h4>
+                    <h4 class="modal-title">Add gift</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -175,8 +178,8 @@
                         `<option disabled value="" selected>--Products--</option>`);
                     $.each(response.products, function(indexInArray, product) {
                         $('.select_product').append(`
-                                            <option value="${product.id}">${product.name}</option>
-                                        `);
+                           <option value="${product.id}">${product.name}</option>
+                             `);
 
                     });
                 }

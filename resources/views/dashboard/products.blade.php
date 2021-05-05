@@ -12,14 +12,14 @@
                 <div class="px-1 row d-flex">
                     @foreach ($category->products as $product)
                         <div class="px-1 my-1 col-md-2">
-                            <div class="card h-100 position-relative">
+                            <div class="card  position-relative" style="height:400px">
                                 <img src="{{ asset('storage/products/' . $product->image) }}"
                                     class="card-img-top w-100 h-50 rounded" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product->name }}</h5>
-                                    <small class="card-text d-block ">{{ $product->description }}</small>
-                                    <small class="card-text d-block">{{ $product->price }}</small>
-                                    <small class="card-text">Points: {{ $product->points }}</small>
+                                    <small class="card-text d-block mb-1">{{ $product->description }}</small>
+                                    <p class="card-text">Price:{{ $product->price }}</p>
+                                    <p class="card-text">Points: {{ $product->points }}</p>
                                     <div class="button-group d-flex position-absolute" style="bottom: 5px">
                                         <button type="button" style='width:100%;height:30px'
                                             class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
@@ -92,14 +92,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody id="myTable">
-                                                        <tr>
-                                                            <td><input type="text" id="addName_ar" name="size_names[]"
-                                                                    class="form-control editSize" value="small"></td>
-                                                            <td><input type="text" id="addName_ar" name="size_prices[]"
-                                                                    class="form-control editSizePrice" value="0"></td>
-                                                            <td><button type="button" class="btn btn-danger"
-                                                                    onclick="myDeleteFunction()">Delete</button></td>
-                                                        </tr>
+                                                        @foreach ($product->sizes as $size)
+                                                            <tr>
+                                                                <td><input type="text" id="addName_ar" value="{{ $size->name }}" name="size_names[]"
+                                                                        class="form-control editSize" value="small"></td>
+                                                                <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                                        class="form-control editSizePrice" value="{{ $size->price }}"></td>
+                                                                <td><button type="button" class="btn btn-danger"
+                                                                        onclick="myDeleteFunction()">Delete</button></td>
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

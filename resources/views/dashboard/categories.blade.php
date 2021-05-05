@@ -14,7 +14,7 @@
             <div class="row d-flex ">
                 @foreach ($categories as $category)
                     <div class="px-1 my-1 col-md-2">
-                        <div class="card h-100 position-relative" >
+                        <div class="card  position-relative" style="height:400px">
                             <img src="{{ asset('storage/categories/' . $category->image) }}"
                                 class="card-img-top w-100 h-50 rounded" alt="...">
                             <div class="card-body">
