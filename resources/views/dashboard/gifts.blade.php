@@ -1,18 +1,19 @@
 @extends('layouts.dashboard')
 @section('content')
 
-    <section class="content">
-
-        <div class="container-fluid">
-            <button type="button" class="btn btn-default float-right" data-toggle="modal" data-target="#modal-default">
-                Launch Default Modal
+    <div class="row px-2">
+        <div class="col-md-12 ">
+            <button type="button" id='addBtn' class="mr-1 addBtn btn btn-sm btn-primary add-category" data-toggle="modal"
+                data-target="#modal-default">
+                Add gift
             </button>
 
-            <div class="row">
-                <div class="col-md-3 mt-5" style="display: -webkit-box; ">
-                    <!-- Profile Image -->
-                    @foreach ($gifts as $gift)
-                        <div class="card card-primary card-outline" style="margin: 0 10px">
+            <div class="row d-flex ">
+                {{-- <div class="col-md-3 mt-5" style=" "> --}}
+                <!-- Profile Image -->
+                @foreach ($gifts as $gift)
+                    <div class="px-1 my-1 col-md-2" style="display: -webkit-box;">
+                        <div class="card h-100 position-relative">
                             <div class="card-body box-profile">
                                 <div class="text-center">
                                     <img class="card-img-top w-100"
@@ -31,20 +32,78 @@
                                     </li>
                                 </ul>
 
-                                <form action="{{ route('d.gift.delete', $gift->id) }}" method="post">
-                                    @method('delete')
-                                    @csrf
-                                    <a href="#" class="btn btn-success" style="width: 49%"><b>Updata</b></a>
-                                    <button type="submit" class="btn btn-danger" style="width: 49%"><b>Delete</b></button>
-                                </form>
+                                <div class="button-group d-flex position-absolute" style="bottom: 5px">
+                                    <button type="button" style='width:100%'
+                                    class="mr-1 editBtn btn btn-primary edit-category" data-toggle="modal"
+                                    data-target="#editGiftModal{{ $gift->id }}">
+                                    Update
+                                </button>
+                                    <form action="{{ route('d.gift.delete', $gift->id) }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        {{-- <a href="#" class="btn btn-info" style="width: 49%"><b>Update</b></a> --}}
+                                        <button type="submit" class="btn btn-danger"
+                                            style="width: 100%"><b>Delete</b></button>
+                                    </form>
+
+                                </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-                <!-- /.col -->
+                    </div>
+
+                    {{-- update --}}
+                    <div class="modal fade" id="editGiftModal{{ $gift->id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Default Modal</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('d.gift.store') }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label>Select Category</label>
+                                            <select class="form-control select_category" required>
+                                                <option disabled selected value="{{ $gift->product->category_id }}">{{ $gift->product->category->name }}</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Select Product</label>
+                                            <select class="form-control select_product" name="product_id" required>
+                                                <option disabled selected value="{{ $gift->product->id}}">{{$gift->product->name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputPassword1">Points</label>
+                                            <input type="number" name="points" value="{{ $gift->points }}" class="form-control" id="exampleInputPassword1"
+                                                placeholder="Points" required>
+                                        </div>
+                                </div>
+                                <div class="modal-footer justify-content-between">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                                </form>
+
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+
+
+                @endforeach
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
     </section>
 
     {{-- Model for Create --}}
@@ -62,8 +121,8 @@
                         @csrf
                         <div class="form-group">
                             <label>Select Category</label>
-                            <select class="form-control select_category">
-                                <option disabled selected>--Categories--</option>
+                            <select class="form-control select_category" required>
+                                <option disabled selected value="">--Categories--</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -71,14 +130,14 @@
                         </div>
                         <div class="form-group">
                             <label>Select Product</label>
-                            <select class="form-control select_product" name="product_id">
-                                <option disabled selected>--Products--</option>
+                            <select class="form-control select_product" name="product_id" required>
+                                <option disabled selected value="">--Products--</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Points</label>
                             <input type="number" name="points" class="form-control" id="exampleInputPassword1"
-                                placeholder="Points">
+                                placeholder="Points" required>
                         </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -92,6 +151,8 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    {{-- Model for Create --}}
+
 
 @endsection
 
@@ -110,11 +171,12 @@
                 dataType: "json",
                 success: function(response) {
                     $('.select_product').empty();
-                    $('.select_product').append(`<option disabled selected>--Products--</option>`);
+                    $('.select_product').append(
+                        `<option disabled value="" selected>--Products--</option>`);
                     $.each(response.products, function(indexInArray, product) {
                         $('.select_product').append(`
-                                        <option value="${product.id}">${product.name}</option>
-                                    `);
+                                            <option value="${product.id}">${product.name}</option>
+                                        `);
 
                     });
                 }

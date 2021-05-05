@@ -7,7 +7,7 @@
     <section class="content col-md-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">waiting </h3>
+                <h3 class="card-title">Waiting orders </h3>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">

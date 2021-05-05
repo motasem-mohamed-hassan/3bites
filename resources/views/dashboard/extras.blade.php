@@ -17,7 +17,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">DataTable with default features</h3>
+            <h3 class="card-title">Extras table</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -128,8 +128,8 @@
                                 <div class="modal-body">
                                     <div class="form-group">
                                         <label>Select type</label>
-                                        <select class="form-control" name="type">
-                                            <option selected disabled>Chose type</option>
+                                        <select class="form-control" name="type" required>
+                                            <option selected disabled value="">Choose type</option>
                                             <option value="Toppings">Toppings</option>
                                             <option value="Dips">Dips</option>
                                             <option value="Drinks">Drinks</option>

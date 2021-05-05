@@ -11,17 +11,17 @@
                 <div style="width: 15%;height:2px;background-color:black;margin:auto"></div> --}}
                 <div class="px-1 row d-flex">
                     @foreach ($category->products as $product)
-                        <div class="px-1 col-md-2">
-                            <div class="py-1 card">
+                        <div class="px-1 my-1 col-md-2">
+                            <div class="card h-100 position-relative">
                                 <img src="{{ asset('storage/products/' . $product->image) }}"
-                                    class="card-img-top w-100 h-50" alt="...">
+                                    class="card-img-top w-100 h-50 rounded" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product->name }}</h5>
-                                    <p class="card-text">{{ $product->description }}</p>
-                                    <p class="card-text">{{ $product->price }}</p>
+                                    <small class="card-text d-block ">{{ $product->description }}</small>
+                                    <small class="card-text d-block">{{ $product->price }}</small>
                                     <small class="card-text">Points: {{ $product->points }}</small>
-                                    <div class="button-group d-flex">
-                                        <button type="button" style='width:45%;height:30px'
+                                    <div class="button-group d-flex position-absolute" style="bottom: 5px">
+                                        <button type="button" style='width:100%;height:30px'
                                             class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
                                             data-target="#editproductModal{{ $product->id }}">
                                             Update
@@ -59,22 +59,23 @@
                                             <div class="form-group">
                                                 <label>Product name</label>
                                                 <input type="text" id="editName" name="name" class="form-control"
-                                                    value="{{ $product->name }}">
+                                                    value="{{ $product->name }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Product description</label>
-                                                <input type="text" id="editDescription" name="description"
-                                                    class="form-control" value="{{ $product->description }}">
+                                                <input type="text" id="editDescription" name="description" maxlength="75"
+                                                    class="form-control" value="{{ $product->description }}" required>
+                                                <label class="text-smaller" style="color: gray">maximum 75 character</label>
                                             </div>
                                             <div class="form-group">
                                                 <label>Product Price</label>
                                                 <input type="number" name="price" class="form-control editPrice"
-                                                    value="{{ $product->price }}">
+                                                    value="{{ $product->price }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Product Points</label>
                                                 <input type="number" name="points" class="form-control editPrice"
-                                                    value="{{ $product->points }}">
+                                                    value="{{ $product->points }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <button type="button" id="addSize" class="btn btn-primary"
@@ -174,8 +175,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Product description</label>
-                                        <input type="text" id="addName_ar" name="description" class="form-control" value=""
+                                        <input type="text" id="addName_ar" name="description" class="form-control" value="" maxlength="75"
                                             required>
+                                        <label class="text-smaller" style="color: gray">maximum 75 character</label>
                                     </div>
                                     <div class="form-group">
                                         <label>Product price</label>

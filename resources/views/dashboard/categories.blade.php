@@ -14,15 +14,15 @@
             <div class="row d-flex ">
                 @foreach ($categories as $category)
                     <div class="px-1 my-1 col-md-2">
-                        <div class="card h-100">
+                        <div class="card h-100 position-relative" >
                             <img src="{{ asset('storage/categories/' . $category->image) }}"
-                                class="card-img-top w-100 h-50" alt="...">
+                                class="card-img-top w-100 h-50 rounded" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $category->name }}</h5>
-                                <p class="card-text " style="over-flow:auto;max-height:80px">{{ $category->description }}
+                                <p class="card-text py-1" >{{ $category->description }}
                                 </p>
-                                <div class="button-group d-flex">
-                                    <button type="button" style='width:45%;height:30px'
+                                <div class="button-group d-flex position-absolute" style="bottom: 5px">
+                                    <button type="button" style='width:100%;height:30px'
                                         class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
                                         data-target="#editCategoryModal{{ $category->id }}">
                                         Update
@@ -65,17 +65,18 @@
                                         <div class="form-group">
                                             <label>Category name</label>
                                             <input type="text" id="editName" name="name" class="form-control"
-                                                value="{{ $category->name }}">
+                                                value="{{ $category->name }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Category description</label>
-                                            <input type="text" id="editDescription" name="description" class="form-control"
-                                                value="{{ $category->description }}">
+                                            <input type="text" id="editDescription" name="description" class="form-control" maxlength="100"
+                                                value="{{ $category->description }}" required>
+                                            <label class="text-smaller" style="color: gray">maximum 100 character</label>
                                         </div>
                                         <div class="form-group">
                                             <label>Select extras</label>
                                             <select class="select2bs4" pla multiple="multiple" name="extras[]"
-                                                style="width: 100%;">
+                                                style="width: 100%;" required>
                                                 @foreach ($extras as $extra)
                                                     <option value="{{ $extra->type }}">{{ $extra->type }}</option>
                                                 @endforeach
@@ -131,8 +132,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Category description</label>
-                                                <input type="text" id="addDescription" name="description"
-                                                    class="form-control" value="" required>
+                                                <input type="text" id="addDescription" name="description" maxlength="100"
+                                                    class="form-control" value="" required placeholder="maximum 100 character">
+                                                <label class="text-smaller" style="color: gray">maximum 100 character</label>
                                             </div>
                                             {{-- <div class="form-group">
                                         <div class="container">
@@ -152,7 +154,7 @@
                                             <div class="form-group">
                                                 <label>Select extras</label>
                                                 <select class="select2bs4" pla multiple="multiple" name="extras[]"
-                                                    data-placeholder="Select a State" style="width: 100%;">
+                                                    data-placeholder="Select a State" required style="width: 100%;">
                                                     @foreach ($extras as $extra)
                                                         <option value="{{ $extra->type }}">{{ $extra->type }}</option>
                                                     @endforeach
@@ -169,7 +171,7 @@
                                             <div class="form-group">
                                                 <label>Category Image</label>
                                                 <div class="">
-                                                    <input type="file" class="dropify" name="image" data-height="200" />
+                                                    <input type="file" class="dropify" name="image" data-height="200" required />
                                                 </div>
                                             </div>
                                         </div>

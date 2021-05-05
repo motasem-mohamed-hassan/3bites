@@ -6,8 +6,8 @@
             @csrf
             @method('put')
 
-            <div class="card card-danger">
-                <div class="card-header">
+            <div class="card ">
+                <div class="card-header" style="background-color:#ef2d24;opacity:0.8">
                     <h3 class="card-title">Information </h3>
                 </div>
                 <div class="card-body">
@@ -77,20 +77,20 @@
                     </div>
                     <div class="form-group">
                         <label>Banner</label>
-                        <div class="input-group col-md-12">
+                        <div class="input-group col-md-12 ">
                             <div class="input-group-prepend col-md-1">
                                 <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                             </div>
                             {{-- <input type="file" class="form-control" value="{{ $info->banner }}" name="banner"> --}}
                             <div class="btn btn-light btn-file col-md-11">
-                                <i class="fas fa-paperclip"></i> product picture
+                                <i class="fas fa-paperclip"></i> Banner
                                 <input id="editImg" type="file" value="{{ $info->banner }}" name="banner" onchange="loadFile(event)">
                                 <p><img src="" id="output"  width="200" /></p>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Update">
+                    <div class="form-group w-100 ">
+                        <input type="submit" class="btn btn-primary d-block m-auto " value="Update">
                     </div>
                 </div>
 
