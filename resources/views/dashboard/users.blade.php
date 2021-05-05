@@ -29,6 +29,7 @@
                                 <th>User ID</th>
                                 <th>User name</th>
                                 <th>Phone </th>
+                                <th>Points</th>
                                 <th>Email</th>
                                 <th>Send e-mail</th>
                             </tr>
@@ -39,6 +40,7 @@
                                     <td> {{ $user->id }}</td>
                                     <td> {{ $user->first_name }} {{ $user->last_name }}</td>
                                     <td> {{ $user->phone }}</td>
+                                    <td>{{ $user->points }}</td>
                                     <td> {{ $user->email }}</td>
                                     <td>
 
@@ -132,7 +134,7 @@
             var to = $('.to').val();
             var subject = $('.subject').val();
             var content = $('.Content').val();
-            window.open("mailto:" + to +"?subject=" + subject + "&body=" + content)
+            window.open("mailto:" + to + "?subject=" + subject + "&body=" + content)
         }
 
     </script>

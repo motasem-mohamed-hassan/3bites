@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\OrderNotification;
+use App\Product;
+use App\User;
 use Illuminate\Support\Facades\Notification;
 
 class OrderController extends Controller
@@ -17,6 +19,7 @@ class OrderController extends Controller
     public function store_order(Request $request)
     {
         $order = new Order();
+
         $order->user_id = $request->user_id;
         $order->user_name = $request->user_name;
         $order->user_phone = $request->user_phone;
@@ -54,6 +57,11 @@ class OrderController extends Controller
                 $e->price = $extra['price'];
                 $e->type = $extra['type'];
                 $e->save();
+            }
+            if($request->has('user_id')){
+                $user = User::find($request->user_id);
+                $product = Product::find($product['product_id']);
+                $user->increment('points', $product->points);
             }
         }
 

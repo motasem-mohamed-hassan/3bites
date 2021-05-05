@@ -42,5 +42,10 @@ Route::namespace('Api')->group(function(){
     Route::post('/register', 'AuthController@register');
     Route::post('/login', 'AuthController@login');
 
+    //user
+    Route::get('user/{user_id}', 'AuthController@get_user');
+
+    //git
+    Route::get('gifts', 'GiftController@get_gifts');
 
 });

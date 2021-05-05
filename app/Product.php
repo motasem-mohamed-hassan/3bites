@@ -22,4 +22,9 @@ class Product extends Model
         return $this->hasMany(Size::class);
     }
 
+    public function gifts()
+    {
+        return $this->hasMany(Gift::class);
+    }
+
 }

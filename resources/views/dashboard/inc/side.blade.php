@@ -78,7 +78,7 @@
                   </li>
 
                   <li class="nav-item">
-                      <a href="{{ route('d.points.index') }}" class="nav-link">
+                      <a href="{{ route('d.gift.index') }}" class="nav-link">
                           <i class="nav-icon fas fa-award"></i>
                           <p>
                               Points

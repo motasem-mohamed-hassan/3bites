@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('lon');
             $table->string('lat');
             $table->string('password');
-            $table->boolean('admin')->default(0);
+            $table->bigInteger('points')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

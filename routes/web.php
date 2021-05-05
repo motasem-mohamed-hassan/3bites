@@ -73,4 +73,11 @@ Route::namespace('Dashboard')->as('d.')->middleware(['auth:admin'])->group(funct
     Route::delete('order/delete/{id}', 'DorderController@delete')->name('order.delete');
     Route::post('order/delete/all', 'DorderController@deleteAll')->name('order.deleteAll');
 
+    //points
+    Route::get('gifts', 'DgiftController@index')->name('gift.index');
+    Route::get('gifts/product', 'DgiftController@get_product')->name('gift.getProduct');
+    Route::post('gifts/store', 'DgiftController@store')->name('gift.store');
+    Route::delete('gift/delete/{gift_id}', 'DgiftController@destroy')->name('gift.delete');
+
+
 });

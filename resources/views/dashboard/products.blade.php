@@ -19,6 +19,7 @@
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <p class="card-text">{{ $product->description }}</p>
                                     <p class="card-text">{{ $product->price }}</p>
+                                    <small class="card-text">Points: {{ $product->points }}</small>
                                     <div class="button-group d-flex">
                                         <button type="button" style='width:45%;height:30px'
                                             class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
@@ -69,6 +70,11 @@
                                                 <label>Product Price</label>
                                                 <input type="number" name="price" class="form-control editPrice"
                                                     value="{{ $product->price }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Product Points</label>
+                                                <input type="number" name="points" class="form-control editPrice"
+                                                    value="{{ $product->points }}">
                                             </div>
                                             <div class="form-group">
                                                 <button type="button" id="addSize" class="btn btn-primary"
@@ -175,6 +181,10 @@
                                         <label>Product price</label>
                                         <input type="number" id="addName_ar" name="price" class="form-control" value=""
                                             required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Product points</label>
+                                        <input type="number" id="addName_ar" name="points" class="form-control" value="">
                                     </div>
                                     <div class="form-group">
                                         <label>Product sizes</label>

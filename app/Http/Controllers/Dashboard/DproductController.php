@@ -45,11 +45,19 @@ class DproductController extends Controller
     public function store(Request $request, FlasherInterface $flasher)
     {
 
+
         $product = new Product();
         $product->category_id   = $request->category_id;
         $product->name          = $request->name;
         $product->description   = $request->description;
         $product->price         = $request->price;
+
+        if($request->points == null){
+            $product->points = 0;
+        }else{
+            $product->points     = $request->points;
+        }
+
 
             $imageurl = $request->file('image');
             $imageurl->getClientOriginalName();
@@ -84,6 +92,7 @@ class DproductController extends Controller
         $product->name          = $request->name;
         $product->description   = $request->description;
         $product->price         = $request->price;
+        $product->points        = $request->points;
 
         if($request->hasFile('image')){
             File::delete('public/products/'.$product->image);
@@ -96,9 +105,9 @@ class DproductController extends Controller
                 $imageurl->storeAs('public/products', $file);
             $product->image = $file;
         }
-        $product->update();
+        $product->save();
 
-        
+
         $flasher->addSuccess('Product Updated Successfully.');
         return back();
     }

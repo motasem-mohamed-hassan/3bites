@@ -41,6 +41,7 @@ class AuthController extends Controller
         $user = User::create($request->toArray());
         $accessToken = $user->createToken('authToken')->accessToken;
         // return response([ 'user' => $user, 'access_token' => $accessToken]);
+        $user->points = 0;
         return response()->json([
             'status' => 1,
             'user' => $user,
@@ -91,5 +92,10 @@ class AuthController extends Controller
         return response($response, 200);
     }
 
+    public function get_user($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        return $user;
+    }
 
 }

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 10, 2);
             $table->unsignedBigInteger('order_count')->default('0');
             $table->string('image')->nullable();
+            $table->bigInteger('points')->nullable();
             $table->timestamps();
         });
     }
