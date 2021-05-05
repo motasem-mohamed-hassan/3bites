@@ -29,7 +29,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Gifts order count</span>
-                                <span class="info-box-number">{{ App\Gift::select('order_count')->sum() }}</span>
+                                <span class="info-box-number">{{ App\Gift::select('order_count')->get()->sum() }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
