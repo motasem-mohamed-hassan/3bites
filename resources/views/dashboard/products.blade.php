@@ -18,20 +18,20 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $product->name }}</h5>
                                     <small class="card-text d-block mb-1">{{ $product->description }}</small>
-                                    <p class="card-text">Price:{{ $product->price }}</p>
-                                    <p class="card-text">Points: {{ $product->points }}</p>
+                                    <small class="card-text d-block">Price:{{ $product->price }}</small>
+                                    <small class="card-text d-block">Points: {{ $product->points }}</small>
                                     <div class="button-group d-flex position-absolute" style="bottom: 5px">
-                                        <button type="button" style='width:100%;height:30px'
-                                            class="mr-1 editBtn btn btn-sm btn-primary edit-product" data-toggle="modal"
+                                        <button type="button" style='width:100%'
+                                            class="mr-2 editBtn btn  btn-primary edit-product" data-toggle="modal"
                                             data-target="#editproductModal{{ $product->id }}">
                                             Update
                                         </button>
                                         <form action="{{ route('d.product.delete', $product->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button style='width:100%;height:30px' type="submit"
+                                            <button style='width:100%' type="submit"
                                                 product_id="{{ $product->id }}"
-                                                class="ml-1 delete_btn btn btn-sm btn-danger">
+                                                class="ml-2 delete_btn btn  btn-danger">
                                                 Delete
                                             </button>
                                         </form>
@@ -210,8 +210,8 @@
                                                             class="form-control" value="small"></td>
                                                     <td><input type="text" id="addName_ar" name="size_prices[]"
                                                             class="form-control" value="0"></td>
-                                                    <td><button type="button" class="btn btn-danger"
-                                                            onclick="myDeleteFunction2()">Delete</button></td>
+                                                    {{-- <td><button type="button" class="btn btn-danger"
+                                                            onclick="myDeleteFunction2()">Delete</button></td> --}}
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -249,40 +249,14 @@
 @section('scripts')
 
     <script>
-        var i = 0;
 
-        function myCreateFunction() {
-            var table = document.getElementById("myTable");
-            var row = table.insertRow(i + 1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            cell1.innerHTML =
-                `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
-            cell2.innerHTML =
-                `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
-            cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction()">Delete</button>`;
-            i++;
-            console.log(i);
-        }
 
-        function myDeleteFunction() {
-            document.getElementById("myTable").deleteRow(i);
-            i--;
-            console.log(i);
-        }
-
-    </script>
-
-    <script>
-        var i2 = 0;
-
-        function myCreateFunction2() {
-            var table = document.getElementById("myTable2");
-            var row = table.insertRow(i2 + 1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
+function myCreateFunction() {
+            let table = document.getElementById("myTable");
+            let row = table.insertRow(i2 + 1);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
             cell1.innerHTML =
                 `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
             cell2.innerHTML =
@@ -292,8 +266,34 @@
             console.log(i2);
         }
 
+        function myDeleteFunction() {
+            document.getElementById("myTable").deleteRow(i2);
+            i2--;
+            console.log(i2);
+        }
+
+        let i2 = 0;
+        let rows = [];
+
+        function myCreateFunction2() {
+            let table = document.getElementById("myTable2");
+            let row = table.insertRow(i2 + 1);
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            cell1.innerHTML =
+                `<input type="text" id="addName_ar" name="size_names[]" class="form-control editSize" value="" required>`;
+            cell2.innerHTML =
+                `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
+            cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction2()">Delete</button>`;
+            rows.push(row);
+            i2++;
+            console.log(i2);
+        }
+
         function myDeleteFunction2() {
             document.getElementById("myTable2").deleteRow(i2);
+            rows.pop();
             i2--;
             console.log(i2);
         }

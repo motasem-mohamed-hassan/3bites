@@ -34,7 +34,7 @@
 
                                 <div class="button-group d-flex position-absolute" style="bottom: 5px">
                                     <button type="button" style='width:100%'
-                                        class="mr-1 editBtn btn btn-primary edit-category" data-toggle="modal"
+                                        class="mx-1 editBtn btn btn-primary edit-category" data-toggle="modal"
                                         data-target="#editGiftModal{{ $gift->id }}">
                                         Update
                                     </button>
@@ -42,8 +42,8 @@
                                         @method('delete')
                                         @csrf
                                         {{-- <a href="#" class="btn btn-info" style="width: 49%"><b>Update</b></a> --}}
-                                        <button type="submit" class="btn btn-danger"
-                                            style="width: 100%"><b>Delete</b></button>
+                                        <button type="submit" class="btn btn-danger ml-2"
+                                            style="width: 100%">Delete</button>
                                     </form>
 
                                 </div>

@@ -48,7 +48,7 @@
                                     </button>
 
                                     <button type="submit" class="btn btn-danger">
-                                        Delte
+                                        Delete
                                     </button>
                                 </form>
 

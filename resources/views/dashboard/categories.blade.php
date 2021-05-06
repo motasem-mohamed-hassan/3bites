@@ -14,7 +14,7 @@
             <div class="row d-flex ">
                 @foreach ($categories as $category)
                     <div class="px-1 my-1 col-md-2">
-                        <div class="card  position-relative" style="height:400px">
+                        <div class="card  position-relative" style="height:420px">
                             <img src="{{ asset('storage/categories/' . $category->image) }}"
                                 class="card-img-top w-100 h-50 rounded" alt="...">
                             <div class="card-body">
@@ -22,8 +22,8 @@
                                 <p class="card-text py-1" >{{ $category->description }}
                                 </p>
                                 <div class="button-group d-flex position-absolute" style="bottom: 5px">
-                                    <button type="button" style='width:100%;height:30px'
-                                        class="mr-1 editBtn btn btn-sm btn-primary edit-category" data-toggle="modal"
+                                    <button type="button" style='width:100%;'
+                                        class="mr-2 editBtn btn  btn-primary edit-category" data-toggle="modal"
                                         data-target="#editCategoryModal{{ $category->id }}">
                                         Update
                                     </button>
@@ -32,9 +32,9 @@
                                         <form action="{{ route('d.category.delete', $category->id) }}" method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button style='width:100%;height:30px' type="submit"
+                                            <button style='width:100%;' type="submit"
                                                 category_id="{{ $category->id }}"
-                                                class="ml-1 delete_btn btn btn-sm btn-danger">
+                                                class="ml-2 delete_btn btn  btn-danger">
                                                 Delete
                                             </button>
                                         </form>
