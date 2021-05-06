@@ -6,6 +6,7 @@ use App\Size;
 use stdClass;
 use App\Product;
 use App\Category;
+use OneSignal;
 use Illuminate\Http\Request;
 use Flasher\Prime\FlasherInterface;
 use App\Http\Controllers\Controller;
@@ -73,6 +74,15 @@ class DproductController extends Controller
             $size->price = $price;
             $size->save();
         }
+
+        OneSignal::sendNotificationToAll(
+            "Check our new products!",
+            $url = null,
+            $data = null,
+            $buttons = null,
+            $schedule = null
+        );
+
 
         $flasher->addSuccess('Product Created Successfully.');
         return back();

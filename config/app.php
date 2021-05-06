@@ -163,7 +163,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Berkayk\OneSignal\OneSignalServiceProvider::class,
         Flasher\Laravel\FlasherServiceProvider::class,
-
+        Berkayk\OneSignal\OneSignalServiceProvider::class,
 
         /*
          * Package Service Providers...
