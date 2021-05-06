@@ -21,7 +21,7 @@ class DproductController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::with('products')->get();
 
         return view('dashboard.products', compact('categories'));
     }

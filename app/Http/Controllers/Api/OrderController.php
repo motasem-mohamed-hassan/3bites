@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Admin;
+use App\Gift;
 use App\Order;
 use App\Oextra;
 use App\Oproduct;
@@ -45,12 +46,6 @@ class OrderController extends Controller
             $p->product_id = $product['product_id'];
             $p->name = $product['name'];
             $p->price = $product['price'];
-            if($request->has('user_id')){
-                if(isset($product['gift_points'])){
-                    $user = User::find($request->user_id);
-                    $user->decrement('points', $product['gift_points']);
-                }
-            }
             $p->size_name = $product['size_name'];
             $p->size_price = $product['size_price'];
             $p->quantity = $product['quantity'];
@@ -67,11 +62,14 @@ class OrderController extends Controller
                 $e->save();
             }
             if($request->has('user_id')){
+                $user = User::find($request->user_id);
+
                 if(isset($product['gift_points'])){
+                    $user->decrement('points', $product['gift_points']);
+                    $gift = Gift::where('product_id', $product['product_id'] )->first();
+                    $gift->increment('order_count', 1);
                 }else{
-                    $user = User::find($request->user_id);
-                    $product = Product::find($product['product_id']);
-                    $user->increment('points', $product->points);
+                    $user->increment('points', ($product['product']['points']* $product['quantity']));
                 }
             }
         }

@@ -49,6 +49,7 @@
                     <th>change status</th>
                 </tr>
                 @foreach ($admins as $admin)
+                @if ($loop->first) @continue @endif
                         <tr>
                             <td>{{ $admin->id }}</td>
                             <td>{{ $admin->name }}</td>

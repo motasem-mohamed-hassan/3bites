@@ -30,6 +30,9 @@
                                     <li class="list-group-item">
                                         <b>Points</b> <a class="float-right">{{ $gift->points }}</a>
                                     </li>
+                                    <li class="list-group-item">
+                                        <small>Order Count</small> <a class="float-right text-small">{{ $gift->order_count }}</a>
+                                    </li>
                                 </ul>
 
                                 <div class="button-group d-flex position-absolute" style="bottom: 5px">

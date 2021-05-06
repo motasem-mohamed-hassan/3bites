@@ -154,7 +154,8 @@
                                             <div class="form-group">
                                                 <label>Select extras</label>
                                                 <select class="select2bs4" pla multiple="multiple" name="extras[]"
-                                                    data-placeholder="Select a State" required style="width: 100%;">
+                                                    data-placeholder="Select a State" style="width: 100%;">
+                                                        <option disabled selected value="">Chose extra type</option>
                                                     @foreach ($extras as $extra)
                                                         <option value="{{ $extra->type }}">{{ $extra->type }}</option>
                                                     @endforeach

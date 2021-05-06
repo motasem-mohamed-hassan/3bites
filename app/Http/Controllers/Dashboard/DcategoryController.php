@@ -38,18 +38,20 @@ class DcategoryController extends Controller
         $category->name = $request->name;
         $category->description = $request->description;
 
-            $imageurl = $request->file('image');
-            $imageurl->getClientOriginalName();
-            $ext    = $imageurl->getClientOriginalExtension();
-            $file   = date('YmdHis').rand(1,99999).'.'.$ext;
-            $imageurl->storeAs('public/categories', $file);
+        $imageurl = $request->file('image');
+        $imageurl->getClientOriginalName();
+        $ext    = $imageurl->getClientOriginalExtension();
+        $file   = date('YmdHis') . rand(1, 99999) . '.' . $ext;
+        $imageurl->storeAs('public/categories', $file);
         $category->image = $file;
 
 
         $category->save();
-        foreach ($request->extras as $type) {
-            $extras = Extra::where('type', $type)->get();
-            $category->extras()->attach($extras);
+        if ($request->has('extras')) {
+            foreach ($request->extras as $type) {
+                $extras = Extra::where('type', $type)->get();
+                $category->extras()->attach($extras);
+            }
         }
 
         $flasher->addSuccess('Category Created Successfully.');
@@ -70,18 +72,18 @@ class DcategoryController extends Controller
         $category->name  =   $request->name;
         $category->description  =   $request->description;
 
-        if($request->hasFile('image')){
-            File::delete('public/categories/'.$category->image);
-            Storage::disk('local')->delete('public/categories/'.$category->image);
+        if ($request->hasFile('image')) {
+            File::delete('public/categories/' . $category->image);
+            Storage::disk('local')->delete('public/categories/' . $category->image);
 
-                $imageurl = $request->file('image');
-                $imageurl->getClientOriginalName();
-                $ext    = $imageurl->getClientOriginalExtension();
-                $file   = date('YmdHis').rand(1,99999).'.'.$ext;
-                $imageurl->storeAs('public/categories', $file);
+            $imageurl = $request->file('image');
+            $imageurl->getClientOriginalName();
+            $ext    = $imageurl->getClientOriginalExtension();
+            $file   = date('YmdHis') . rand(1, 99999) . '.' . $ext;
+            $imageurl->storeAs('public/categories', $file);
             $category->image = $file;
         }
-        if($request->has('extras')){
+        if ($request->has('extras')) {
             $category->extras()->detach();
             foreach ($request->extras as $type) {
                 $extras = Extra::where('type', $type)->get();
@@ -93,7 +95,6 @@ class DcategoryController extends Controller
         $category->save();
         $flasher->addSuccess('Category Updated Successfully.');
         return back();
-
     }
 
     /**
@@ -105,8 +106,8 @@ class DcategoryController extends Controller
     public function destroy($id, FlasherInterface $flasher)
     {
         $category = Category::find($id);
-        File::delete('public/categories/'.$category->image);
-        Storage::disk('local')->delete('public/categories/'.$category->image);
+        File::delete('public/categories/' . $category->image);
+        Storage::disk('local')->delete('public/categories/' . $category->image);
 
         $category->delete();
 
