@@ -31,12 +31,14 @@
                             <th style="width: 15%">
                                 Created at
                             </th>
+                            @if(Auth::guard('admin')->user()->is_super)
                             <th style="width: 20%">
                                 <form action="{{ route('d.order.deleteAll') }}" method="post">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-danger">Delete All</button>
                                 </form>
                             </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -61,6 +63,7 @@
                                     <td>
                                         {{ $order->created_at }}
                                     </td>
+                                    @if(Auth::guard('admin')->user()->is_super)
                                     <td class="project-actions text-right">
                                         <form action="{{ route('d.order.delete', $order->id) }}" method="post">
                                             @csrf
@@ -70,6 +73,7 @@
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
 
                                 <div class="modal fade bd-example-modal-lg{{ $order->id }}" tabindex="-1" role="dialog"

@@ -3,12 +3,10 @@
     <div class="px-4 row">
         <div class="col-md-12">
             @foreach ($categories as $category)
+                @if($category->products->count() > 0 )
                 <div class="my-3 callout callout-info w-25">
                     <h3>{{ $category->name }}</h3>
-
                 </div>
-                {{-- <h2 style="text-align: center;">{{ $category->name }}</h2>
-                <div style="width: 15%;height:2px;background-color:black;margin:auto"></div> --}}
                 <div class="px-1 row d-flex">
                     @foreach ($category->products as $product)
                         <div class="px-1 my-1 col-md-2">
@@ -130,6 +128,7 @@
 
                     @endforeach
                 </div>
+                @endif
             @endforeach
         </div>
     </div>

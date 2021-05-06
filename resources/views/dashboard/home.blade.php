@@ -29,7 +29,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Gifts order count</span>
-                                <span class="info-box-number">{{ App\Gift::select('order_count')->get()->sum() }}</span>
+                                <span class="info-box-number">{{ App\Gift::get()->pluck('order_count')->sum() }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -42,7 +42,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Orders in waiting list</span>
-                                <span class="info-box-number">{{ App\Order::where('confirm', false)->count() }}</span>
+                                <span class="info-box-number">{{ App\Order::where('confirm', false)->select('id')->count() }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -59,7 +59,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Total sales</span>
-                                <span class="info-box-number">{{ App\Order::where('confirm', true)->sum('total') }}</span>
+                                <span class="info-box-number">{{ App\Order::where('confirm', true)->select('total')->sum('total') }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
@@ -72,7 +72,7 @@
 
                             <div class="info-box-content">
                                 <span class="info-box-text">Members Count</span>
-                                <span class="info-box-number">{{ App\User::select('id')->count() }}</span>
+                                <span class="info-box-number">{{ App\User::pluck('id')->count() }}</span>
                             </div>
                             <!-- /.info-box-content -->
                         </div>
