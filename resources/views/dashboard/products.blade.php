@@ -96,6 +96,9 @@
                                                                         class="form-control editSize" value="small"></td>
                                                                 <td><input type="text" id="addName_ar" name="size_prices[]"
                                                                         class="form-control editSizePrice" value="{{ $size->price }}"></td>
+                                                                        <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                                            class="form-control editSizePrice" value="{{ $size->price }}"></td>
+
                                                                 <td><button type="button" class="btn btn-danger"
                                                                         onclick="myDeleteFunction()">Delete</button></td>
                                                             </tr>
@@ -261,12 +264,14 @@ function myCreateFunction() {
             cell2.innerHTML =
                 `<input type="number" id="addName_ar" name="size_prices[]" class="form-control editSizePrice" value="" required>`;
             cell3.innerHTML = `<button type="button" class="btn btn-danger" onclick="myDeleteFunction2()">Delete</button>`;
+            rows.push(row);
             i2++;
             console.log(i2);
         }
 
         function myDeleteFunction() {
             document.getElementById("myTable").deleteRow(i2);
+            rows.pop();
             i2--;
             console.log(i2);
         }
@@ -290,7 +295,7 @@ function myCreateFunction() {
             console.log(i2);
         }
 
-        function myDeleteFunction2() {
+        function myDeleteFunction2(row) {
             document.getElementById("myTable2").deleteRow(i2);
             rows.pop();
             i2--;
