@@ -75,10 +75,10 @@
                                                 <input type="number" name="points" class="form-control editPrice"
                                                     value="{{ $product->points }}" required>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <button type="button" id="addSize" class="btn btn-primary"
                                                     onclick="myCreateFunction()">Add size</button>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label>Product sizes</label>
                                                 <table class="table">
@@ -86,7 +86,7 @@
                                                         <tr>
                                                             <th scope="col">Size</th>
                                                             <th scope="col">Price</th>
-                                                            <th scope="col">Delete item</th>
+                                                            {{-- <th scope="col">Delete item</th> --}}
                                                         </tr>
                                                     </thead>
                                                     <tbody id="myTable">
@@ -94,14 +94,14 @@
                                                             <tr>
                                                                 <td><input type="text" id="addName_ar" value="{{ $size->name }}" name="size_names[]"
                                                                         class="form-control editSize" value="small"></td>
-                                                                <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                                <td><input type="number" id="addName_ar" name="size_prices[]"
                                                                         class="form-control editSizePrice" value="{{ $size->price }}"></td>
-                                                                        <td><input type="text" id="addName_ar" name="size_prices[]"
-                                                                            class="form-control editSizePrice" value="{{ $size->price }}"></td>
+                                                                        {{-- <td><input type="text" id="addName_ar" name="size_prices[]"
+                                                                            class="form-control editSizePrice" value="{{ $size->price }}"></td> --}}
 
-                                                                <td><button type="button" class="btn btn-danger"
+                                                                {{-- <td><button type="button" class="btn btn-danger"
                                                                         onclick="myDeleteFunction()">Delete</button></td>
-                                                            </tr>
+                                                            </tr> --}}
                                                         @endforeach
                                                     </tbody>
                                                 </table>
